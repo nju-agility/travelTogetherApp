@@ -1,10 +1,17 @@
-共有9个表：
+共有10个表：
 
 **!!**对于重要的，或者没有默认值的字段加粗了（看仔细）, 所有表名小写，且为复数
 
 1. users
 2. activities
-
+3. admins
+4. relative_paths
+5. user_applies
+6. user_comments
+7. user_records
+8. tags
+9. activitiy_tags
+10. user_tags
 
 
 ## 1. users
@@ -113,4 +120,109 @@
 11. num_of_score
 
     评价这个活动的人数，作用计算平均得分
+
+12. num_0f_pic
+
+    这个活动的宣传图片的张数，默认是0
+13. type
+
+    活动的类型，默认是outgoing
+
+
+## 3. admins
+主键：无
+
+1. **account**
+
+    varchar(10) not null
+
+2. **passwd**
+
+    varchar(100) not null
+
+## 4. relative_paths
+1. **item**
+
+    int  not null
+        1 用户头像
+        2 用户身份证
+        3 发布活动的宣传图片
+        4 用户拍摄的上传的图片
+2. **path**
+
+    这些项的图片存储的父路径，
+    路径组装 = path + 唯一标识(account) +“_” + [序号] + ".png/jpeg"
+
+## 5. user_applies
+主键：aid,account
+此表中存储 “用户申请活动" 的申请
+1. **aid**
+
+    int not null 外建到activities的aid
+2. **account**
+
+    varchar(32) not null 外建到users.account
+
+## 6. user_comments
+主键：account_commenter, account_commented
+1. **account_commenter**
+
+    评论者 not null 外键到 users.account
+2. **account_commented**
+
+    被评论者 not null 外键到 users.account
+3. comment
+
+    评论 not null 默认是 'good'
+4. score
+
+    得分 not null 默认 100
+
+## 7. user_records
+用户参加过的活动记录表
+1. **account**
+
+    外键到 users.account
+
+2. **aid**
+
+    活动id 外键
+3. **comment**
+
+    尽管都是comment， 有别于user_comments.comment，这个是对活动的评价，后者是对用户的评价
+
+4. score
+
+    对此活动的评分 默认100
+
+5. num_0f_pic
+
+    用户上传的照片数量 默认是0
+
+
+## 8. tags
+主键: tid
+1. tid
+
+    int not null 自增字段 标签id
+2. **tag**
+
+    varchar(20) not null 没有默认值 标签
+
+## 9. activity_tags
+1. **aid**
+
+    活动id 外键到activities.aid
+
+2. **tid**
+
+    标签 外键到tags.tid
+
+## 10. user_tags
+1. **account**
+
+    用户 外键到users.account
+
+2. **tid**
+    标签 外键到tags.tid
 

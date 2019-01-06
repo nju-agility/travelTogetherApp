@@ -1,15 +1,13 @@
-create database travel;
-use travel;
--- MySQL dump 10.13  Distrib 5.7.24, for Linux (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.13, for Linux (x86_64)
 --
 -- Host: localhost    Database: travel
 -- ------------------------------------------------------
--- Server version	5.7.24-0ubuntu0.18.04.1
+-- Server version	8.0.13
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
+ SET NAMES utf8mb4 ;
 /*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
 /*!40103 SET TIME_ZONE='+00:00' */;
 /*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
@@ -23,7 +21,7 @@ use travel;
 
 DROP TABLE IF EXISTS `activities`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `activities` (
   `aid` int(11) NOT NULL AUTO_INCREMENT,
   `status` tinyint(4) NOT NULL DEFAULT '0' COMMENT '0 是刚创建\n1 是已经验证发布\n3 是已经撤销\n4 是正在进行中\n5 结束',
@@ -36,10 +34,11 @@ CREATE TABLE `activities` (
   `time_end` varchar(20) NOT NULL DEFAULT '2020-01-01',
   `score` tinyint(3) unsigned NOT NULL DEFAULT '100',
   `num_of_score` smallint(5) unsigned NOT NULL DEFAULT '1',
+  `num_of_pic` int(11) NOT NULL DEFAULT '0',
   `type` varchar(20) NOT NULL DEFAULT 'outgoing',
   PRIMARY KEY (`aid`),
   UNIQUE KEY `idactivities_UNIQUE` (`aid`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COMMENT='活动表';
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8 COMMENT='活动表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -48,34 +47,56 @@ CREATE TABLE `activities` (
 
 LOCK TABLES `activities` WRITE;
 /*!40000 ALTER TABLE `activities` DISABLE KEYS */;
-INSERT INTO `activities` VALUES (0,0,'lx','南京','鼓楼','not a activity','just for foregin key','2019-01-01','2048',100,1,'outgoing');
+INSERT INTO `activities` VALUES (0,0,'lx','南京','鼓楼','not a activity','just for foregin key','2019-01-01','2048',100,1,0,'outgoing'),(1,5,'11','南京','鼓楼','1','1','2019-01-01','2020-01-01',100,1,0,'outgoing'),(9,1,'11','南京','鼓楼','1','1','2019-01-01','2020-01-01',100,1,0,'outgoing'),(10,0,'1','南京','鼓楼','逛街','qw','2019-01-06','2019-01-07',100,1,0,'花钱');
 /*!40000 ALTER TABLE `activities` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `activity_tag`
+-- Table structure for table `activity_tags`
 --
 
-DROP TABLE IF EXISTS `activity_tag`;
+DROP TABLE IF EXISTS `activity_tags`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `activity_tag` (
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `activity_tags` (
   `aid` int(11) NOT NULL,
   `tid` int(11) NOT NULL,
   KEY `fk_activity_tag_a_idx` (`aid`),
   KEY `fk_activity_tag_t_idx` (`tid`),
-  CONSTRAINT `fk_activity_tag_a` FOREIGN KEY (`aid`) REFERENCES `activities` (`aid`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_activity_tag_t` FOREIGN KEY (`tid`) REFERENCES `tags` (`tid`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  CONSTRAINT `fk_activity_tag_a` FOREIGN KEY (`aid`) REFERENCES `activities` (`aid`),
+  CONSTRAINT `fk_activity_tag_t` FOREIGN KEY (`tid`) REFERENCES `tags` (`tid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `activity_tag`
+-- Dumping data for table `activity_tags`
 --
 
-LOCK TABLES `activity_tag` WRITE;
-/*!40000 ALTER TABLE `activity_tag` DISABLE KEYS */;
-/*!40000 ALTER TABLE `activity_tag` ENABLE KEYS */;
+LOCK TABLES `activity_tags` WRITE;
+/*!40000 ALTER TABLE `activity_tags` DISABLE KEYS */;
+/*!40000 ALTER TABLE `activity_tags` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `admins`
+--
+
+DROP TABLE IF EXISTS `admins`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `admins` (
+  `account` varchar(32) NOT NULL,
+  `passwd` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `admins`
+--
+
+LOCK TABLES `admins` WRITE;
+/*!40000 ALTER TABLE `admins` DISABLE KEYS */;
+/*!40000 ALTER TABLE `admins` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -84,7 +105,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `relative_paths`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `relative_paths` (
   `item` int(11) NOT NULL COMMENT '0 用户头像\n1 用户身份证\n2 用户拍摄照片\n3 风景照片\n',
   `path` varchar(200) NOT NULL COMMENT '父路径',
@@ -108,7 +129,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `tags`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `tags` (
   `tid` int(11) NOT NULL AUTO_INCREMENT,
   `tag` varchar(20) NOT NULL,
@@ -131,14 +152,14 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `user_applies`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `user_applies` (
   `aid` int(11) NOT NULL,
   `account` varchar(32) NOT NULL,
   PRIMARY KEY (`aid`,`account`),
   KEY `fk_user_applies_2_idx` (`account`),
-  CONSTRAINT `fk_user_applies_1` FOREIGN KEY (`aid`) REFERENCES `activities` (`aid`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_user_applies_2` FOREIGN KEY (`account`) REFERENCES `users` (`account`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  CONSTRAINT `fk_user_applies_1` FOREIGN KEY (`aid`) REFERENCES `activities` (`aid`),
+  CONSTRAINT `fk_user_applies_2` FOREIGN KEY (`account`) REFERENCES `users` (`account`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -157,7 +178,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `user_comments`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `user_comments` (
   `account_commenter` varchar(32) NOT NULL,
   `account_commented` varchar(32) NOT NULL,
@@ -165,8 +186,8 @@ CREATE TABLE `user_comments` (
   `score` tinyint(3) unsigned NOT NULL DEFAULT '100',
   PRIMARY KEY (`account_commenter`,`account_commented`),
   KEY `fk_user_commented_idx` (`account_commented`),
-  CONSTRAINT `fk_user_commented` FOREIGN KEY (`account_commented`) REFERENCES `users` (`account`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_user_commenter` FOREIGN KEY (`account_commenter`) REFERENCES `users` (`account`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  CONSTRAINT `fk_user_commented` FOREIGN KEY (`account_commented`) REFERENCES `users` (`account`),
+  CONSTRAINT `fk_user_commenter` FOREIGN KEY (`account_commenter`) REFERENCES `users` (`account`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -185,16 +206,17 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `user_records`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `user_records` (
   `account` varchar(32) NOT NULL,
   `aid` int(11) NOT NULL,
   `comment` varchar(200) NOT NULL DEFAULT '',
+  `score` tinyint(4) NOT NULL DEFAULT '100',
   `num_of_pic` tinyint(3) unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY (`account`,`aid`),
   KEY `fk_records_1_idx` (`aid`),
-  CONSTRAINT `fk_record_uid` FOREIGN KEY (`account`) REFERENCES `users` (`account`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_records_1` FOREIGN KEY (`aid`) REFERENCES `activities` (`aid`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  CONSTRAINT `fk_record_uid` FOREIGN KEY (`account`) REFERENCES `users` (`account`),
+  CONSTRAINT `fk_records_1` FOREIGN KEY (`aid`) REFERENCES `activities` (`aid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -213,14 +235,14 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `user_tags`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `user_tags` (
   `account` varchar(32) NOT NULL,
   `tid` int(11) NOT NULL,
   KEY `fk_user_tags_u_idx` (`account`),
   KEY `fk_user_tags_t_idx` (`tid`),
-  CONSTRAINT `fk_user_tags_t` FOREIGN KEY (`tid`) REFERENCES `tags` (`tid`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_user_tags_u` FOREIGN KEY (`account`) REFERENCES `users` (`account`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  CONSTRAINT `fk_user_tags_t` FOREIGN KEY (`tid`) REFERENCES `tags` (`tid`),
+  CONSTRAINT `fk_user_tags_u` FOREIGN KEY (`account`) REFERENCES `users` (`account`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -239,7 +261,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `users`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `users` (
   `account` varchar(32) NOT NULL COMMENT 'email',
   `name` varchar(10) NOT NULL,
@@ -256,7 +278,7 @@ CREATE TABLE `users` (
   PRIMARY KEY (`account`),
   UNIQUE KEY `id_UNIQUE` (`account`),
   KEY `fk_user_activity_idx` (`activity_id`),
-  CONSTRAINT `fk_user_activity` FOREIGN KEY (`activity_id`) REFERENCES `activities` (`aid`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  CONSTRAINT `fk_user_activity` FOREIGN KEY (`activity_id`) REFERENCES `activities` (`aid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -266,6 +288,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
+INSERT INTO `users` VALUES ('123@qq.com','123',0,18,0,0,'南京',0,NULL,'123',1,100),('haoge@123.com','lisi',1,18,0,0,'jiangsu',0,'1234567890','123',1,100);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -278,4 +301,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-01-05 18:28:53
+-- Dump completed on 2019-01-06 19:03:01
