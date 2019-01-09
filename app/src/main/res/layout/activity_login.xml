@@ -43,6 +43,7 @@
             app:mtf_image="@drawable/account"
             app:mtf_cardCollapsedHeight="4dp">
             <EditText
+                android:id="@+id/login_account"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Account"
@@ -57,6 +58,7 @@
             app:mtf_labelColor="#FFFFFF"
             app:mtf_image="@drawable/password">
             <EditText
+                android:id="@+id/login_pwd"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Password"
@@ -73,36 +75,17 @@
         android:orientation="vertical"
         android:layout_marginTop="20dp"
         app:layout_constraintTop_toBottomOf="@id/login_input">
-       <LinearLayout
-           android:layout_width="match_parent"
-           android:layout_height="wrap_content"
-           android:orientation="horizontal"
-           android:paddingLeft="50dp"
-           android:paddingRight="50dp"
-           android:layout_marginTop="12dp"
-           android:layout_marginBottom="32dp">
-           <TextView
-               android:id="@+id/login_request_result"
-               android:layout_width="0dp"
-               android:layout_height="wrap_content"
-               android:layout_weight="5"
-               android:text="显示登陆失败的原因"
-               android:textSize="14sp"
-               android:textColor="#FFFFFF"
-               android:layout_gravity="end"
-               android:gravity="center" />
-           <TextView
-               android:id="@+id/forget_account"
-               android:layout_width="0dp"
-               android:layout_height="wrap_content"
-               android:layout_weight="2"
-               android:text="忘记密码？"
-               android:textSize="14sp"
-               android:textColor="#FFFFFF"
-               android:layout_gravity="end"
-               android:gravity="center"/>
-
-       </LinearLayout>
+        <TextView
+            android:id="@+id/forget_account"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="忘记密码？"
+            android:textSize="14sp"
+            android:textColor="#FFFFFF"
+            android:layout_gravity="end"
+            android:gravity="center"
+            android:layout_marginEnd="50dp"
+            android:layout_marginBottom="20dp"/>
         <Button
             android:id="@+id/submit_login"
             android:layout_width="200dp"

@@ -7,7 +7,7 @@ public class CodeHelper {
     private static volatile CodeHelper codeHelper = new CodeHelper();
 
 
-    public CodeHelper getCodeHelper(){
+    public static CodeHelper getCodeHelper(){
         synchronized (CodeHelper.class){
             return codeHelper;
         }
