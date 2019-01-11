@@ -36,4 +36,9 @@ public class SharedHelper {
     public void setFloat(String a,Float b){editor.putFloat(a,b);editor.apply();}
 
     public void setBool(String a,boolean b){editor.putBoolean(a,b);editor.apply();}
+
+    public void cleanAll(){
+        editor.clear();
+        editor.apply();
+    }
 }

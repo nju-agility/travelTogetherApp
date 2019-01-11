@@ -7,12 +7,14 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 
+import com.example.chand.traveltogether.Utils.RequestManager;
 import com.example.chand.traveltogether.Utils.SharedHelper;
 
 public class AdActivity extends BaseActivity {
     SharedHelper sp;
     boolean isTokenEmpty;
     Intent intent;
+    RequestManager manager;
 
 
     @Override
@@ -34,11 +36,13 @@ public class AdActivity extends BaseActivity {
         View decorView = getWindow().getDecorView();
         int uiOptions = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION | View.SYSTEM_UI_FLAG_FULLSCREEN;
         decorView.setSystemUiVisibility(uiOptions);
+        manager = new RequestManager();
     }
 
     @Override
     protected void initialData() {
         sp = SharedHelper.getSharedHelper();
+//        sp.cleanAll();
         isTokenEmpty = sp.getBool("isTokenEmpty", true);
         if (isTokenEmpty) {
             intent = new Intent(AdActivity.this, LoginActivity.class);

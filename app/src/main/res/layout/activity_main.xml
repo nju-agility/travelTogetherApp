@@ -14,72 +14,88 @@
         android:clipToPadding="false"
         app:edPosition="1"
         app:edMenuSize="260dp"
-        app:edMenuBackground="#dddddd">
+        app:edMenuBackground="#EEEEEE">
 
         <!--content-->
         <android.support.constraint.ConstraintLayout
             android:id="@+id/main_layout_content"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+
             <android.support.v4.view.ViewPager
                 android:id="@+id/main_viewpager"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toTopOf="@id/recommend_tabs"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
             </android.support.v4.view.ViewPager>
-            <LinearLayout
-                android:id="@+id/recommend_tab"
-                android:layout_width="60dp"
+            <android.support.constraint.ConstraintLayout
+                android:id="@+id/recommend_tabs"
+                android:layout_width="match_parent"
                 android:layout_height="70dp"
-                android:orientation="vertical"
+                app:layout_constraintTop_toBottomOf="@id/main_viewpager"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintHorizontal_chainStyle="spread"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toLeftOf="@id/management_tab">
-
-                <ImageView
-                    android:id="@+id/recommend_img"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:scaleType="fitXY"
-                    android:padding="8dp"
-                    android:layout_gravity="center_horizontal"
-                    android:src="@drawable/recommend_unselected"/>
-                <TextView
-                    android:id="@+id/recommend_text"
+                android:background="#FFFFFF">
+                <LinearLayout
+                    android:id="@+id/recommend_tab"
                     android:layout_width="60dp"
-                    android:layout_height="30dp"
-                    android:textColor="#000000"
-                    android:textSize="13sp"
-                    android:text="活动推荐"
-                    android:gravity="center"/>
-            </LinearLayout>
-            <LinearLayout
-                android:id="@+id/management_tab"
-                android:layout_width="60dp"
-                android:layout_height="70dp"
-                android:orientation="vertical"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintLeft_toRightOf="@id/recommend_tab"
-                app:layout_constraintRight_toRightOf="parent">
+                    android:layout_height="70dp"
+                    android:orientation="vertical"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintHorizontal_chainStyle="spread"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toLeftOf="@id/management_tab">
 
-                <ImageView
-                    android:id="@+id/management_img"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:scaleType="fitXY"
-                    android:padding="8dp"
-                    android:layout_gravity="center_horizontal"
-                    android:src="@drawable/management_unselected"/>
-                <TextView
-                    android:id="@+id/management_text"
+                    <ImageView
+                        android:id="@+id/recommend_img"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:scaleType="fitXY"
+                        android:paddingLeft="2dp"
+                        android:paddingRight="2dp"
+                        android:paddingTop="4dp"
+                        android:layout_gravity="center_horizontal"
+                        android:src="@drawable/recommend_unselected"/>
+                    <TextView
+                        android:id="@+id/recommend_text"
+                        android:layout_width="60dp"
+                        android:layout_height="30dp"
+                        android:textColor="#000000"
+                        android:textSize="13sp"
+                        android:text="活动推荐"
+                        android:gravity="center"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/management_tab"
                     android:layout_width="60dp"
-                    android:layout_height="30dp"
-                    android:textColor="#000000"
-                    android:textSize="13sp"
-                    android:text="活动管理"
-                    android:gravity="center"/>
-            </LinearLayout>
+                    android:orientation="vertical"
+                    android:layout_height="70dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toRightOf="@id/recommend_tab"
+                    app:layout_constraintRight_toRightOf="parent">
+
+                    <ImageView
+                        android:id="@+id/management_img"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:scaleType="fitXY"
+                        android:paddingLeft="2dp"
+                        android:paddingRight="2dp"
+                        android:paddingTop="4dp"
+                        android:layout_gravity="center_horizontal"
+                        android:src="@drawable/management_unselected"/>
+                    <TextView
+                        android:id="@+id/management_text"
+                        android:layout_width="60dp"
+                        android:layout_height="30dp"
+                        android:textColor="#000000"
+                        android:textSize="13sp"
+                        android:text="活动管理"
+                        android:gravity="center"/>
+                </LinearLayout>
+            </android.support.constraint.ConstraintLayout>
 
 
         </android.support.constraint.ConstraintLayout>
@@ -97,6 +113,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="#F9F9F9">
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="#999999"
+                    app:layout_constraintEnd_toEndOf="parent"/>
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="116dp"

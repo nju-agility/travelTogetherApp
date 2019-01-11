@@ -38,11 +38,14 @@
             android:name=".view.Activity.DetailActivity"
             android:theme="@style/AppTheme.Main"></activity>
         <activity
-            android:name=".view.Activity.ForgetPwdActivity"
-            android:theme="@style/AppTheme.Login"></activity>
+            android:name=".view.Activity.PersonCenterActivity"
+            android:theme="@style/AppTheme.Detail"
+            android:label="个人中心" />
     </application>
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
 
 
 </manifest>

@@ -1,20 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--<android.support.constraint.ConstraintLayout-->
-    <!--xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"-->
-    <!--android:layout_height="match_parent">-->
-    <!---->
-
-<!--</android.support.constraint.ConstraintLayout>-->
-<jp.co.recruit_lifestyle.android.widget.WaveSwipeRefreshLayout
+<jp.co.recruit_lifestyle.android.widget.WaveSwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/recommend_swipe"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/recommend_swipe"
-    android:background="#712632"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    android:background="#DDDDDD">
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recommend_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
     </android.support.v7.widget.RecyclerView>
+    <!--<com.melnykov.fab.FloatingActionButton-->
+    <!--android:id="@+id/recommend_fab"-->
+    <!--android:layout_width="40dp"-->
+    <!--android:layout_height="40dp"-->
+    <!--android:layout_gravity="bottom|end"-->
+    <!--android:layout_margin="16dp"-->
+    <!--android:scaleType="fitXY"-->
+    <!--android:padding="4dp"-->
+    <!--android:src="@drawable/search"-->
+    <!--fab:fab_colorNormal="@color/colorPrimary"-->
+    <!--fab:fab_colorPressed="@color/colorPrimaryDark" />-->
 
 </jp.co.recruit_lifestyle.android.widget.WaveSwipeRefreshLayout>

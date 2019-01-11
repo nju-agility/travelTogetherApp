@@ -1,0 +1,467 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="#ffffff">
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/center_img_container"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_width="match_parent"
+        android:focusable="true"
+        android:layout_height="84dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="头像"
+            android:layout_weight="3"
+            android:textSize="14sp"
+            android:textColor="#222222"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:layout_marginStart="18dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" />
+        <ImageView
+            android:id="@+id/center_user_img_arrow"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/right_arrow"
+            android:scaleType="fitXY"
+            android:padding="8dp"
+            android:layout_marginEnd="18dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/center_user_img"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:src="@drawable/testpic"
+            app:civ_border_width="2dp"
+            app:civ_border_color="#FF000000"
+            app:layout_constraintEnd_toStartOf="@id/center_user_img_arrow"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+    </android.support.constraint.ConstraintLayout>
+
+    <View
+        android:id="@+id/decor_1"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:background="#aaaaaa"
+        app:layout_constraintTop_toBottomOf="@id/center_img_container"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintWidth_percent="0.9"/>
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/center_account_container"
+        android:layout_width="match_parent"
+        app:layout_constraintTop_toBottomOf="@id/decor_1"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_height="60dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="账号"
+            android:layout_weight="3"
+            android:textSize="14sp"
+            android:textColor="#222222"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:layout_marginStart="18dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="账号"
+            android:textSize="13sp"
+            android:textColor="#444444"
+            android:layout_marginEnd="58dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+    </android.support.constraint.ConstraintLayout>
+
+    <View
+        android:id="@+id/decor_2"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:background="#aaaaaa"
+        app:layout_constraintTop_toBottomOf="@id/center_account_container"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintWidth_percent="0.9"/>
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/center_name_container"
+        android:layout_width="match_parent"
+        android:focusable="true"
+        app:layout_constraintTop_toBottomOf="@id/decor_2"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_height="60dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="姓名"
+            android:layout_weight="3"
+            android:textSize="14sp"
+            android:textColor="#222222"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:layout_marginStart="18dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" />
+        <ImageView
+            android:id="@+id/center_user_name_arrow"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/right_arrow"
+            android:scaleType="fitXY"
+            android:padding="8dp"
+            android:layout_marginEnd="18dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="姓名"
+            android:textSize="13sp"
+            android:textColor="#444444"
+            app:layout_constraintEnd_toStartOf="@id/center_user_name_arrow"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+    </android.support.constraint.ConstraintLayout>
+
+    <View
+        android:id="@+id/decor_3"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:background="#aaaaaa"
+        app:layout_constraintTop_toBottomOf="@id/center_name_container"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintWidth_percent="0.9"/>
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/center_password_container"
+        android:layout_width="match_parent"
+        android:focusable="true"
+        app:layout_constraintTop_toBottomOf="@id/decor_3"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_height="60dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="密码"
+            android:layout_weight="3"
+            android:textSize="14sp"
+            android:textColor="#222222"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:layout_marginStart="18dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" />
+        <ImageView
+            android:id="@+id/center_user_password_arrow"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/right_arrow"
+            android:scaleType="fitXY"
+            android:padding="8dp"
+            android:layout_marginEnd="18dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="密码"
+            android:textSize="13sp"
+            android:textColor="#444444"
+            app:layout_constraintEnd_toStartOf="@id/center_user_password_arrow"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+    </android.support.constraint.ConstraintLayout>
+
+    <View
+        android:id="@+id/decor_4"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:background="#aaaaaa"
+        app:layout_constraintTop_toBottomOf="@id/center_password_container"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintWidth_percent="0.9"/>
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/center_gender_container"
+        android:layout_width="match_parent"
+        app:layout_constraintTop_toBottomOf="@id/decor_4"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_height="60dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="性别"
+            android:layout_weight="3"
+            android:textSize="14sp"
+            android:textColor="#222222"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:layout_marginStart="18dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" />
+        <ImageView
+            android:id="@+id/center_user_gender_arrow"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/right_arrow"
+            android:scaleType="fitXY"
+            android:padding="8dp"
+            android:layout_marginEnd="18dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="未设置"
+            android:textSize="13sp"
+            android:textColor="#444444"
+            app:layout_constraintEnd_toStartOf="@id/center_user_gender_arrow"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+    </android.support.constraint.ConstraintLayout>
+
+    <View
+        android:id="@+id/decor_5"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:background="#aaaaaa"
+        app:layout_constraintTop_toBottomOf="@id/center_gender_container"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintWidth_percent="0.9"/>
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/center_age_container"
+        android:layout_width="match_parent"
+        android:focusable="true"
+        app:layout_constraintTop_toBottomOf="@id/decor_5"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_height="60dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="年龄"
+            android:layout_weight="3"
+            android:textSize="14sp"
+            android:textColor="#222222"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:layout_marginStart="18dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" />
+        <ImageView
+            android:id="@+id/center_user_age_arrow"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/right_arrow"
+            android:scaleType="fitXY"
+            android:padding="8dp"
+            android:layout_marginEnd="18dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="未设置"
+            android:textSize="13sp"
+            android:textColor="#444444"
+            app:layout_constraintEnd_toStartOf="@id/center_user_age_arrow"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+    </android.support.constraint.ConstraintLayout>
+
+    <View
+        android:id="@+id/decor_6"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:background="#aaaaaa"
+        app:layout_constraintTop_toBottomOf="@id/center_age_container"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintWidth_percent="0.9"/>
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/center_edu_container"
+        android:layout_width="match_parent"
+        app:layout_constraintTop_toBottomOf="@id/decor_6"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_height="60dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="学校"
+            android:layout_weight="3"
+            android:textSize="14sp"
+            android:textColor="#222222"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:layout_marginStart="18dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" />
+        <ImageView
+            android:id="@+id/center_user_edu_arrow"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/right_arrow"
+            android:scaleType="fitXY"
+            android:padding="8dp"
+            android:layout_marginEnd="18dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="未设置"
+            android:textSize="13sp"
+            android:textColor="#444444"
+            app:layout_constraintEnd_toStartOf="@id/center_user_edu_arrow"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+    </android.support.constraint.ConstraintLayout>
+
+    <View
+        android:id="@+id/decor_7"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:background="#aaaaaa"
+        app:layout_constraintTop_toBottomOf="@id/center_edu_container"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintWidth_percent="0.9"/>
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/center_city_container"
+        android:layout_width="match_parent"
+        app:layout_constraintTop_toBottomOf="@id/decor_7"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_height="60dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="城市"
+            android:layout_weight="3"
+            android:textSize="14sp"
+            android:textColor="#222222"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:layout_marginStart="18dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" />
+        <ImageView
+            android:id="@+id/center_user_city_arrow"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/right_arrow"
+            android:scaleType="fitXY"
+            android:padding="8dp"
+            android:layout_marginEnd="18dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="未设置"
+            android:textSize="13sp"
+            android:textColor="#444444"
+            app:layout_constraintEnd_toStartOf="@id/center_user_city_arrow"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+    </android.support.constraint.ConstraintLayout>
+
+    <View
+        android:id="@+id/decor_8"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:background="#aaaaaa"
+        app:layout_constraintTop_toBottomOf="@id/center_city_container"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintWidth_percent="0.9"/>
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/center_score_container"
+        android:layout_width="match_parent"
+        app:layout_constraintTop_toBottomOf="@id/decor_8"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_height="60dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="账号信誉"
+            android:layout_weight="3"
+            android:textSize="14sp"
+            android:textColor="#222222"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:layout_marginStart="18dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="未设置"
+            android:textSize="13sp"
+            android:textColor="#444444"
+            android:layout_marginEnd="58dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+    </android.support.constraint.ConstraintLayout>
+
+    <View
+        android:id="@+id/decor_9"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:background="#aaaaaa"
+        app:layout_constraintTop_toBottomOf="@id/center_score_container"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintWidth_percent="0.9"/>
+
+
+
+</android.support.constraint.ConstraintLayout>

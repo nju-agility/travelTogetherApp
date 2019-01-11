@@ -1,4 +1,6 @@
 package com.example.chand.traveltogether.model;
 
-public class User {
+public class User extends BaseModel{
+
+
 }

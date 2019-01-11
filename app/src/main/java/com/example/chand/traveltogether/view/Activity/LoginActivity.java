@@ -1,8 +1,10 @@
 package com.example.chand.traveltogether.view.Activity;
 
 
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
-import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -10,7 +12,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.chand.traveltogether.R;
-import com.example.chand.traveltogether.Utils.CodeHelper;
 import com.example.chand.traveltogether.Utils.SharedHelper;
 import com.example.chand.traveltogether.presenter.Interface.ILoginPresenter;
 import com.example.chand.traveltogether.presenter.LoginPresenter;
@@ -21,7 +22,6 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 
-import static com.example.chand.traveltogether.Utils.SharedHelper.getSharedHelper;
 
 public class LoginActivity extends BaseActivity implements ILoginView {
     @BindView(R.id.forget_account)
@@ -59,60 +59,78 @@ public class LoginActivity extends BaseActivity implements ILoginView {
     }
 
     @OnClick(R.id.submit_login)
-    public void doSubmit(View view){
+    public void doSubmit(View view) {
         String account = accountEditor.getText().toString();
-        String pwd = CodeHelper.getCodeHelper().encode(pwdEditor.getText().toString());
+        String pwd = pwdEditor.getText().toString();
 
-        presenter.submitLogin(account,pwd);
+        presenter.submitLogin(account, pwd);
     }
 
     @OnClick(R.id.submit_register)
-    public void doRegister(View view){
+    public void doRegister(View view) {
         presenter.submitRegister();
     }
 
     @OnClick(R.id.forget_account)
-    public void doForgetPwd(View view){
+    public void doForgetPwd(View view) {
+        showNormalDialog();
+    }
 
+
+    private void showNormalDialog() {
+        final AlertDialog.Builder normalDialog =
+                new AlertDialog.Builder(LoginActivity.this);
+        normalDialog.setIcon(R.drawable.x);
+        normalDialog.setTitle("该功能暂未开放");
+        normalDialog.setMessage("由于后台服务器没有设置邮箱，该功能暂未开放！");
+        normalDialog.setPositiveButton("确定",
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        System.out.println("user want to reset the account");
+                    }
+                });
+        normalDialog.show();
     }
 
     @Override
     public void showResult(String s) {
-        Toast.makeText(this,s,Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, s, Toast.LENGTH_SHORT).show();
     }
 
 
     @Override
     public void callStartActivity(String s) {
-        switch (s){
-            case "Main":{
-                intent = new Intent(LoginActivity.this,MainActivity.class);
+        switch (s) {
+            case "Main": {
+                intent = new Intent(LoginActivity.this, MainActivity.class);
                 startActivity(intent);
                 finish();
                 break;
             }
-            case "Register":{
-                intent = new Intent(LoginActivity.this,RegisterActivity.class);
-                startActivityForResult(intent,1);
+            case "Register": {
+                intent = new Intent(LoginActivity.this, RegisterActivity.class);
+                startActivityForResult(intent, 1);
                 break;
-            }
-            case "Forget":{
-                intent = new Intent(LoginActivity.this,ForgetPwdActivity.class);
-                startActivity(intent);
             }
         }
     }
 
     @Override
+    public Context getContext() {
+        return this.getContext();
+    }
+
+    @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        switch (requestCode){
+        switch (requestCode) {
             case 1:
-                if(resultCode == 1){
+                if (resultCode == 1) {
                     String acc = SharedHelper.getSharedHelper().getStr("account", "null");
                     String pwd = SharedHelper.getSharedHelper().getStr("password", "null");
-                    if(!acc.equals("null")&&!pwd.equals("null")){
-                        presenter.submitLogin(acc,pwd);
+                    if (!acc.equals("null") && !pwd.equals("null")) {
+                        presenter.submitLogin(acc, pwd);
                     }
                 }
         }
