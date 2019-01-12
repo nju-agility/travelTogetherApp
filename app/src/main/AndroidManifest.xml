@@ -27,7 +27,8 @@
             android:theme="@style/AppTheme.Login"></activity>
         <activity
             android:name=".view.Activity.MainActivity"
-            android:theme="@style/AppTheme.Main"></activity>
+            android:theme="@style/AppTheme.Detail"
+            android:label="一起去旅游！"></activity>
         <activity
             android:name=".view.Activity.RegisterActivity"
             android:theme="@style/AppTheme.Login"></activity>

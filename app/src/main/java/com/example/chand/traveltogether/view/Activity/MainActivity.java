@@ -12,9 +12,11 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.example.chand.traveltogether.R;
 import com.example.chand.traveltogether.Utils.SharedHelper;
 import com.example.chand.traveltogether.adapter.FragmentAdapter;
+import com.example.chand.traveltogether.application.TravelApplication;
 import com.example.chand.traveltogether.model.UserEntity;
 import com.example.chand.traveltogether.presenter.Interface.IMainPresenter;
 import com.example.chand.traveltogether.presenter.MainPresenter;
@@ -105,9 +107,17 @@ public class MainActivity extends FragmentActivity implements IMainView {
         boolean isNew = SharedHelper.getSharedHelper().getBool("isNewAccount", false);
         if (isNew) {
             Intent intent = new Intent(MainActivity.this, PersonCenterActivity.class);
+            initialInfo();
             startActivity(intent);
         }
         requestUserInfo();
+    }
+
+    public void initialInfo() {
+        SharedHelper.getSharedHelper().setInt("gender", 0);
+        SharedHelper.getSharedHelper().setInt("age", 18);
+        SharedHelper.getSharedHelper().setStr("city", "地球村");
+        SharedHelper.getSharedHelper().setStr("school","南京大学");
     }
 
     @Override
@@ -115,6 +125,14 @@ public class MainActivity extends FragmentActivity implements IMainView {
         super.onResume();
         accountStr = SharedHelper.getSharedHelper().getStr("account", "账号");
         nameStr = SharedHelper.getSharedHelper().getStr("name", "用户名");
+        String url = SharedHelper.getSharedHelper().getStr("userPic", "");
+//        System.out.println("URL ----------->" + url);
+//        System.out.println(url.equals(""));
+        if (url.equals("/image/Dont't find image!")) {
+            Glide.with(this).load(R.drawable.testpic).into(picIV);
+        } else {
+            Glide.with(this).load(url).into(picIV);
+        }
         accountTv.setText(accountStr);
         nameTv.setText(nameStr);
     }
@@ -180,13 +198,13 @@ public class MainActivity extends FragmentActivity implements IMainView {
 
     @Override
     public void writeUserInfo(ArrayList<UserEntity> userEntity) {
-        UserEntity entity = (UserEntity) userEntity.get(0);
+        UserEntity entity = userEntity.get(0);
         SharedHelper.getSharedHelper().setStr("name", entity.getName());
-        SharedHelper.getSharedHelper().setStr("city", entity.getCity());
+        SharedHelper.getSharedHelper().setStr("city", entity.getCity().equals("")?"地球村":entity.getCity());
         SharedHelper.getSharedHelper().setInt("age", entity.getAge());
-        String gender = entity.getGender() == 0 ? "男" : "女";
-        SharedHelper.getSharedHelper().setStr("gender", gender);
+        SharedHelper.getSharedHelper().setInt("gender", entity.getGender());
         SharedHelper.getSharedHelper().setInt("score", entity.getScore());
         SharedHelper.getSharedHelper().setStr("school", entity.getSchool());
+        SharedHelper.getSharedHelper().setStr("userPic", entity.getHeadURL());
     }
 }

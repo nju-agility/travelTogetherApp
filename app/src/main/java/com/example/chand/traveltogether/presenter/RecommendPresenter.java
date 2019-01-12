@@ -19,7 +19,7 @@ public class RecommendPresenter implements IRecommendPresenter {
     private WeakReference<IRecommendView> view;
     private ArrayList<ActivityEntity> list;
 
-    public RecommendPresenter(IRecommendView view){
+    public RecommendPresenter(IRecommendView view) {
         this.view = new WeakReference<>(view);
         manager = new RequestManager();
     }
@@ -37,8 +37,12 @@ public class RecommendPresenter implements IRecommendPresenter {
 
                     @Override
                     public void onNext(Activity activity) {
-                        list = activity.getData().getContent();
-                        view.get().setPerformanceData(list);
+                        if (activity.getResCode() == 0) {
+                            list = activity.getData().getContent();
+                            view.get().setPerformanceData(list);
+                        }else {
+                            view.get().showError("没有更多的结果了");
+                        }
                     }
 
                     @Override

@@ -44,6 +44,12 @@ public class Validator {
      */
     public static final String REGEX_IP_ADDR = "(25[0-5]|2[0-4]\\d|[0-1]\\d{2}|[1-9]?\\d)";
 
+    public static final String REGEX_AGE = "^[1-9]([0-9])?$";
+
+    public static boolean isAge(String age) {
+        return Pattern.matches(REGEX_AGE, age);
+    }
+
     /**
      * 校验用户名
      *

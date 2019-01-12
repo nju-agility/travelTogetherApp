@@ -52,6 +52,7 @@ public class LoginPresenter implements ILoginPresenter {
                                 SharedHelper.getSharedHelper().setStr("account", mlogin.getData().getAccount());
                                 SharedHelper.getSharedHelper().setStr("name", mlogin.getData().getName());
                                 SharedHelper.getSharedHelper().setStr("token", mlogin.getData().getToken());
+                                SharedHelper.getSharedHelper().setStr("userPic", mlogin.getData().getHeadURL());
                                 SharedHelper.getSharedHelper().setBool("isTokenEmpty", false);
                                 view.get().callStartActivity("Main");
                             }

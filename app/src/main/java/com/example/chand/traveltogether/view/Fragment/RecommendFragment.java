@@ -100,4 +100,9 @@ public class RecommendFragment extends BaseFragment implements IRecommendView {
     public void stopRefreshing() {
         swipeRefreshLayout.setRefreshing(false);
     }
+
+    @Override
+    public void showError(String s) {
+        Toast.makeText(getActivity(), s, Toast.LENGTH_SHORT).show();
+    }
 }

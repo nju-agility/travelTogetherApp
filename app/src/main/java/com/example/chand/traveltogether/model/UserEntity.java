@@ -14,6 +14,7 @@ public class UserEntity {
     private Integer num_Of_score;
     private Integer score;
     private String school;
+    private String headURL;
 
     public String getAccount() {
         return account;
@@ -119,6 +120,14 @@ public class UserEntity {
         this.school = school;
     }
 
+    public String getHeadURL() {
+        return headURL;
+    }
+
+    public void setHeadURL(String headURL) {
+        this.headURL = headURL;
+    }
+
     @Override
     public String toString() {
         return "UserEntity{" +
@@ -135,6 +144,7 @@ public class UserEntity {
                 ", num_Of_score=" + num_Of_score +
                 ", score=" + score +
                 ", school='" + school + '\'' +
+                ", headURL='" + headURL + '\'' +
                 '}';
     }
 }

@@ -9,4 +9,5 @@ public interface IRecommendView {
     void setPerformanceData(ArrayList<ActivityEntity> entities);
     void showCardView();
     void stopRefreshing();
+    void showError(String s);
 }

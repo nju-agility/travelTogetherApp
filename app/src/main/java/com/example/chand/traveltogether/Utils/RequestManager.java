@@ -5,6 +5,7 @@ import com.example.chand.traveltogether.application.TravelApplication;
 import com.example.chand.traveltogether.model.Activity;
 import com.example.chand.traveltogether.model.LoginReq;
 import com.example.chand.traveltogether.model.RegisterReq;
+import com.example.chand.traveltogether.model.UpdateUserTextInfoReq;
 import com.example.chand.traveltogether.model.User;
 
 import io.reactivex.Observable;
@@ -29,12 +30,16 @@ public class RequestManager {
         mRetrofitService = null;
     }
 
-    public Observable<Activity> getAllActivities(){
+    public Observable<Activity> getAllActivities() {
         return mRetrofitService.getAllActivities();
     }
 
-    public Observable<User> getUserInfo(String account){
+    public Observable<User> getUserInfo(String account) {
         return mRetrofitService.getUserInfo(account);
     }
 
+    public Observable<UpdateUserTextInfoReq> updateUserTextInfoReqObservable(String name, int gender, int age, String city, String code,
+                                                                             String passwd, String account, String school) {
+        return mRetrofitService.updateUserTextInfo(name, gender, age, city, code, passwd, account, school);
+    }
 }
