@@ -29,6 +29,9 @@
         <!--<item name="android:navigationBarColor">@android:color/transparent</item>-->
         <!--<item name="android:windowTranslucentStatus">true</item>-->
     </style>
+    <style name="AppTheme.AppDetail" parent="AppTheme">
+        <item name="android:actionBarStyle">@style/my_actionbar_style</item>
+    </style>
 
     <style name="AppTheme.Detail" parent="android:Theme.Material">
         <item name="android:actionBarStyle">@style/my_actionbar_style</item>

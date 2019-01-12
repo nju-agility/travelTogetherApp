@@ -1,6 +1,8 @@
 package com.example.chand.traveltogether.model;
 
-public class ActivityEntity {
+import java.io.Serializable;
+
+public class ActivityEntity implements Serializable {
     private Integer aid;
     private Integer status;
     private String owner;

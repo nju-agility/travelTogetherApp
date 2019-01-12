@@ -1,6 +1,8 @@
 package com.example.chand.traveltogether.view.Fragment;
 
+import android.content.Intent;
 import android.graphics.Color;
+import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -14,6 +16,7 @@ import com.example.chand.traveltogether.adapter.RecyclerAdapter;
 import com.example.chand.traveltogether.model.ActivityEntity;
 import com.example.chand.traveltogether.presenter.Interface.IRecommendPresenter;
 import com.example.chand.traveltogether.presenter.RecommendPresenter;
+import com.example.chand.traveltogether.view.Activity.DetailActivity;
 import com.example.chand.traveltogether.view.Fragment.Interface.IRecommendView;
 import com.melnykov.fab.FloatingActionButton;
 
@@ -68,7 +71,12 @@ public class RecommendFragment extends BaseFragment implements IRecommendView {
         adapter.setOnItemClickListener(new RecyclerAdapter.OnItemClickListener() {
             @Override
             public void OnItemClick(View v, int position) {
-                Toast.makeText(getActivity(), entities.get(position).getTitle(), Toast.LENGTH_SHORT).show();
+                ActivityEntity obj = entities.get(position);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("activity", obj);
+                Intent intent = new Intent(getActivity(), DetailActivity.class);
+                intent.putExtras(bundle);
+                startActivity(intent);
             }
         });
         recyclerView.setAdapter(adapter);

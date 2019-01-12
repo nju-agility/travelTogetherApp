@@ -36,12 +36,12 @@
             android:name=".view.Activity.SearchActivity"
             android:theme="@style/AppTheme.Main"></activity>
         <activity
-            android:name=".view.Activity.DetailActivity"
-            android:theme="@style/AppTheme.Main"></activity>
-        <activity
             android:name=".view.Activity.PersonCenterActivity"
             android:theme="@style/AppTheme.Detail"
             android:label="个人中心" />
+        <activity android:name=".view.Activity.DetailActivity"
+            android:theme="@style/AppTheme.AppDetail"
+            android:label="活动详情"/>
     </application>
 
     <uses-permission android:name="android.permission.INTERNET" />
