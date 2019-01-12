@@ -81,6 +81,7 @@
             app:layout_constraintBottom_toBottomOf="parent" />
 
         <TextView
+            android:id="@+id/center_user_account"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="账号"
@@ -135,6 +136,7 @@
             app:layout_constraintBottom_toBottomOf="parent"/>
 
         <TextView
+            android:id="@+id/center_user_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="姓名"
@@ -189,6 +191,7 @@
             app:layout_constraintBottom_toBottomOf="parent"/>
 
         <TextView
+            android:id="@+id/center_user_password"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="密码"
@@ -242,6 +245,7 @@
             app:layout_constraintBottom_toBottomOf="parent"/>
 
         <TextView
+            android:id="@+id/center_user_gender"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="未设置"
@@ -295,6 +299,7 @@
             app:layout_constraintBottom_toBottomOf="parent"/>
 
         <TextView
+            android:id="@+id/center_user_age"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="未设置"
@@ -347,6 +352,7 @@
             app:layout_constraintBottom_toBottomOf="parent"/>
 
         <TextView
+            android:id="@+id/center_user_school"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="未设置"
@@ -399,6 +405,7 @@
             app:layout_constraintBottom_toBottomOf="parent"/>
 
         <TextView
+            android:id="@+id/center_user_city"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="未设置"
@@ -440,9 +447,10 @@
             app:layout_constraintBottom_toBottomOf="parent" />
 
         <TextView
+            android:id="@+id/center_user_score"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="未设置"
+            android:text="100"
             android:textSize="13sp"
             android:textColor="#444444"
             android:layout_marginEnd="58dp"

@@ -5,6 +5,7 @@ import com.example.chand.traveltogether.application.TravelApplication;
 import com.example.chand.traveltogether.model.Activity;
 import com.example.chand.traveltogether.model.LoginReq;
 import com.example.chand.traveltogether.model.RegisterReq;
+import com.example.chand.traveltogether.model.User;
 
 import io.reactivex.Observable;
 
@@ -30,6 +31,10 @@ public class RequestManager {
 
     public Observable<Activity> getAllActivities(){
         return mRetrofitService.getAllActivities();
+    }
+
+    public Observable<User> getUserInfo(String account){
+        return mRetrofitService.getUserInfo(account);
     }
 
 }

@@ -23,6 +23,8 @@ public interface RetrofitService {
     @GET("/api/publishedActivities")
     Observable<Activity> getAllActivities();
 
+    @GET("/api/userInfo")
+    Observable<User> getUserInfo(@Query("account")String account);
 
 
 }
