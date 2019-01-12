@@ -3,7 +3,6 @@ package com.example.chand.traveltogether.view.Fragment;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -11,6 +10,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.example.chand.traveltogether.R;
+import com.example.chand.traveltogether.Utils.SharedHelper;
 import com.example.chand.traveltogether.adapter.CardDecoration;
 import com.example.chand.traveltogether.adapter.RecyclerAdapter;
 import com.example.chand.traveltogether.model.ActivityEntity;
@@ -18,7 +18,6 @@ import com.example.chand.traveltogether.presenter.Interface.IRecommendPresenter;
 import com.example.chand.traveltogether.presenter.RecommendPresenter;
 import com.example.chand.traveltogether.view.Activity.DetailActivity;
 import com.example.chand.traveltogether.view.Fragment.Interface.IRecommendView;
-import com.melnykov.fab.FloatingActionButton;
 
 import java.util.ArrayList;
 
@@ -74,6 +73,12 @@ public class RecommendFragment extends BaseFragment implements IRecommendView {
                 ActivityEntity obj = entities.get(position);
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("activity", obj);
+                boolean type = SharedHelper.getSharedHelper().getBool("doing", false);
+                if(type){
+                    bundle.putInt("type", 4);
+                }else {
+                    bundle.putInt("type", 1);
+                }
                 Intent intent = new Intent(getActivity(), DetailActivity.class);
                 intent.putExtras(bundle);
                 startActivity(intent);
@@ -88,8 +93,8 @@ public class RecommendFragment extends BaseFragment implements IRecommendView {
     @Override
     public void onResume() {
         super.onResume();
-
-
+        swipeRefreshLayout.setRefreshing(true);
+        presenter.doGetRecommendActivity();
     }
 
     @Override

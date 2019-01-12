@@ -82,7 +82,7 @@ public class PersonCenterActivity extends BaseActivity implements IPersonCenterV
         if (SharedHelper.getSharedHelper().getStr("userPic", "/image/Dont't find image!").equals("/image/Dont't find image!")) {
             Glide.with(this).load(R.drawable.testpic).into(picIv);
         } else {
-            Glide.with(this).load(SharedHelper.getSharedHelper().getStr("userPic", "")).into(picIv);
+            Glide.with(this).load(getString(R.string.base_url) + SharedHelper.getSharedHelper().getStr("userPic", "")).into(picIv);
         }
 
     }

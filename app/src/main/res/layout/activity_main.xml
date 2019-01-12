@@ -92,7 +92,7 @@
                         android:layout_height="30dp"
                         android:textColor="#000000"
                         android:textSize="13sp"
-                        android:text="活动管理"
+                        android:text="活动分类"
                         android:gravity="center"/>
                 </LinearLayout>
             </android.support.constraint.ConstraintLayout>

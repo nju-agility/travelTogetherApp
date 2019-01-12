@@ -3,6 +3,7 @@ package com.example.chand.traveltogether.Utils;
 import com.example.chand.traveltogether.model.Activity;
 import com.example.chand.traveltogether.model.LoginReq;
 import com.example.chand.traveltogether.model.RegisterReq;
+import com.example.chand.traveltogether.model.ReqJoinActivity;
 import com.example.chand.traveltogether.model.UpdateUserTextInfoReq;
 import com.example.chand.traveltogether.model.User;
 
@@ -33,6 +34,16 @@ public interface RetrofitService {
                                                          @Field("age") int age, @Field("city") String city, @Field("code") String code,
                                                          @Field("passwd") String passwd, @Field("account") String account, @Field("school") String school);
 
+    @GET("/api/userAttendActivity")
+    Observable<Activity> getCurrentActivity(@Query("activity_id")int activity_id);
 
+    @GET("/api/getRecord")
+    Observable<Activity> getHistoryActivities(@Query("account")String account);
+
+    @GET("/api/userApplyActivity")
+    Observable<ReqJoinActivity> requestJoinActivity(@Query("account")String account,@Query("activity_id")int activity_id);
+
+    @GET("/api/typeActivities")
+    Observable<Activity> getTypeActivities(@Query("type")String type);
 
 }

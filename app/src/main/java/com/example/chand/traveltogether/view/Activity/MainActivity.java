@@ -1,5 +1,6 @@
 package com.example.chand.traveltogether.view.Activity;
 
+import android.app.ActionBar;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -11,12 +12,14 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.chand.traveltogether.R;
 import com.example.chand.traveltogether.Utils.SharedHelper;
 import com.example.chand.traveltogether.adapter.FragmentAdapter;
 import com.example.chand.traveltogether.application.TravelApplication;
+import com.example.chand.traveltogether.model.ActivityEntity;
 import com.example.chand.traveltogether.model.UserEntity;
 import com.example.chand.traveltogether.presenter.Interface.IMainPresenter;
 import com.example.chand.traveltogether.presenter.MainPresenter;
@@ -68,6 +71,7 @@ public class MainActivity extends FragmentActivity implements IMainView {
     String picUrl;
 
     private IMainPresenter presenter;
+    private ActivityEntity current;
 
 //        mDrawer = (FlowingDrawer) findViewById(R.id.drawerlayout);
 //        mDrawer.setTouchMode(ElasticDrawer.TOUCH_MODE_BEZEL);
@@ -95,6 +99,10 @@ public class MainActivity extends FragmentActivity implements IMainView {
         setContentView(R.layout.activity_main);
         unbinder = ButterKnife.bind(this);
         presenter = new MainPresenter(this);
+        ActionBar actionBar = getActionBar();
+        actionBar.setDisplayShowHomeEnabled(true);
+        actionBar.setLogo(R.drawable.travel);
+        actionBar.setDisplayUseLogoEnabled(true);
         Fragment recommendFragment = new RecommendFragment();
         Fragment managementFragment = new ManagementFragment();
         fragments = new ArrayList<>();
@@ -117,7 +125,8 @@ public class MainActivity extends FragmentActivity implements IMainView {
         SharedHelper.getSharedHelper().setInt("gender", 0);
         SharedHelper.getSharedHelper().setInt("age", 18);
         SharedHelper.getSharedHelper().setStr("city", "地球村");
-        SharedHelper.getSharedHelper().setStr("school","南京大学");
+        SharedHelper.getSharedHelper().setStr("school", "南京大学");
+        SharedHelper.getSharedHelper().setInt("activity_id", 0);
     }
 
     @Override
@@ -128,13 +137,14 @@ public class MainActivity extends FragmentActivity implements IMainView {
         String url = SharedHelper.getSharedHelper().getStr("userPic", "");
 //        System.out.println("URL ----------->" + url);
 //        System.out.println(url.equals(""));
-        if (url.equals("/image/Dont't find image!")) {
+        if (url.equals("/image/Dont't find image!") || url.equals("")) {
             Glide.with(this).load(R.drawable.testpic).into(picIV);
         } else {
-            Glide.with(this).load(url).into(picIV);
+            Glide.with(this).load(getString(R.string.base_url) + url).into(picIV);
         }
         accountTv.setText(accountStr);
         nameTv.setText(nameStr);
+        presenter.getUserInfo(SharedHelper.getSharedHelper().getAccount());
     }
 
     @Override
@@ -177,9 +187,21 @@ public class MainActivity extends FragmentActivity implements IMainView {
                 break;
             }
             case R.id.user_current: {
+                if(null!=this.current){
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable("activity", this.current);
+                    bundle.putInt("type", 3);
+                    intent = new Intent(MainActivity.this, DetailActivity.class);
+                    intent.putExtras(bundle);
+                    startActivity(intent);
+                }else {
+                    Toast.makeText(this, "没有正在进行中的活动", Toast.LENGTH_SHORT).show();
+                }
                 break;
             }
             case R.id.user_history: {
+                intent = new Intent(MainActivity.this, HistoryActivity.class);
+                startActivity(intent);
                 break;
             }
             case R.id.user_exit: {
@@ -197,14 +219,28 @@ public class MainActivity extends FragmentActivity implements IMainView {
     }
 
     @Override
-    public void writeUserInfo(ArrayList<UserEntity> userEntity) {
-        UserEntity entity = userEntity.get(0);
+    public void writeUserInfo(UserEntity userEntity) {
+        UserEntity entity = userEntity;
         SharedHelper.getSharedHelper().setStr("name", entity.getName());
-        SharedHelper.getSharedHelper().setStr("city", entity.getCity().equals("")?"地球村":entity.getCity());
+        SharedHelper.getSharedHelper().setStr("city", entity.getCity().equals("") ? "地球村" : entity.getCity());
         SharedHelper.getSharedHelper().setInt("age", entity.getAge());
         SharedHelper.getSharedHelper().setInt("gender", entity.getGender());
         SharedHelper.getSharedHelper().setInt("score", entity.getScore());
         SharedHelper.getSharedHelper().setStr("school", entity.getSchool());
         SharedHelper.getSharedHelper().setStr("userPic", entity.getHeadURL());
+        SharedHelper.getSharedHelper().setInt("activity_id", entity.getActivity_id());
+        SharedHelper.getSharedHelper().setBool("doing", false);
+        presenter.getCurrentActivity(SharedHelper.getSharedHelper().getInt("activity_id", 0));
+    }
+
+    @Override
+    public void setCurrentActivity(ActivityEntity activity) {
+        this.current = activity;
+        SharedHelper.getSharedHelper().setBool("doing", true);
+    }
+
+    @Override
+    public void showError(String s) {
+        System.out.println(s);
     }
 }

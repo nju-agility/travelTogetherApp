@@ -4,13 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UserContent {
-    private ArrayList<UserEntity> content;
+    private UserEntity content;
 
-    public ArrayList<UserEntity> getContent() {
+    public UserEntity getContent() {
         return content;
     }
 
-    public void setContent(ArrayList<UserEntity> content) {
+    public void setContent(UserEntity content) {
         this.content = content;
     }
 

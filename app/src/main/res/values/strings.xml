@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">TravelTogether</string>
+    <string name="base_url">http://47.100.119.155:8888</string>
 </resources>

@@ -42,6 +42,9 @@
         <activity android:name=".view.Activity.DetailActivity"
             android:theme="@style/AppTheme.AppDetail"
             android:label="活动详情"/>
+        <activity android:name=".view.Activity.HistoryActivity"
+            android:theme="@style/AppTheme.Detail"
+            android:label="历史记录"/>
     </application>
 
     <uses-permission android:name="android.permission.INTERNET" />

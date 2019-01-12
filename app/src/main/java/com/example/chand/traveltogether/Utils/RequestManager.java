@@ -5,6 +5,7 @@ import com.example.chand.traveltogether.application.TravelApplication;
 import com.example.chand.traveltogether.model.Activity;
 import com.example.chand.traveltogether.model.LoginReq;
 import com.example.chand.traveltogether.model.RegisterReq;
+import com.example.chand.traveltogether.model.ReqJoinActivity;
 import com.example.chand.traveltogether.model.UpdateUserTextInfoReq;
 import com.example.chand.traveltogether.model.User;
 
@@ -41,5 +42,21 @@ public class RequestManager {
     public Observable<UpdateUserTextInfoReq> updateUserTextInfoReqObservable(String name, int gender, int age, String city, String code,
                                                                              String passwd, String account, String school) {
         return mRetrofitService.updateUserTextInfo(name, gender, age, city, code, passwd, account, school);
+    }
+
+    public Observable<Activity> getCurrentActivity(int activity_id) {
+        return mRetrofitService.getCurrentActivity(activity_id);
+    }
+
+    public Observable<Activity> getHistoryActivities(String account) {
+        return mRetrofitService.getHistoryActivities(account);
+    }
+
+    public Observable<ReqJoinActivity> requestJoinActivity(String account, int activity_id) {
+        return mRetrofitService.requestJoinActivity(account, activity_id);
+    }
+
+    public Observable<Activity> getTypeActivities(String type) {
+        return mRetrofitService.getTypeActivities(type);
     }
 }

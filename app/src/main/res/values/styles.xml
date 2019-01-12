@@ -31,6 +31,7 @@
     </style>
     <style name="AppTheme.AppDetail" parent="AppTheme">
         <item name="android:actionBarStyle">@style/my_actionbar_style</item>
+        <item name="colorPrimaryDark">#000000</item>
     </style>
 
     <style name="AppTheme.Detail" parent="android:Theme.Material">

@@ -25,7 +25,7 @@
     <show-object-properties value="true" />
     <loaded-nodes>
       <connection connection-id="5ed5cf31-c191-4d05-a82b-0a0b6dfa5eb0">
-        <schema name="travel" object-types="table" />
+        <schema name="travel" object-types="table, view, procedure, function, constraint, index, column, dataset trigger" />
       </connection>
     </loaded-nodes>
   </component>
