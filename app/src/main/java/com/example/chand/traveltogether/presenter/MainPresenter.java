@@ -37,6 +37,7 @@ public class MainPresenter implements IMainPresenter {
                     @Override
                     public void onNext(User user) {
                         muser = user;
+                        System.out.println(user.toString());
                     }
 
                     @Override
@@ -64,6 +65,7 @@ public class MainPresenter implements IMainPresenter {
 
                     @Override
                     public void onNext(Activity activity) {
+                        System.out.println(activity.toString());
                         if(activity.getResCode() == 0 ){
                             if (activity.getData().getContent().size() > 0){
                                 view.get().setCurrentActivity(activity.getData().getContent().get(0));

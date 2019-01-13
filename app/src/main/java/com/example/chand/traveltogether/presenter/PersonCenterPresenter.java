@@ -1,6 +1,7 @@
 package com.example.chand.traveltogether.presenter;
 
 import com.example.chand.traveltogether.Utils.RequestManager;
+import com.example.chand.traveltogether.model.ReqUpload;
 import com.example.chand.traveltogether.model.UpdateUserTextInfoReq;
 import com.example.chand.traveltogether.presenter.Interface.IPersonCenterPresenter;
 import com.example.chand.traveltogether.view.Interface.IPersonCenterView;
@@ -11,6 +12,7 @@ import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
+import okhttp3.MultipartBody;
 
 public class PersonCenterPresenter implements IPersonCenterPresenter {
     private RequestManager manager;
@@ -39,6 +41,38 @@ public class PersonCenterPresenter implements IPersonCenterPresenter {
                             view.get().showReqResult("更新成功");
                         } else {
                             view.get().showError("更新出现错误，请检查输入信息");
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+    }
+
+    @Override
+    public void requestUpdateIcon(String account, MultipartBody.Part File) {
+        manager.requestUpload(account,0,File)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<ReqUpload>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(ReqUpload reqUpload) {
+                        if(reqUpload.getResCode()==0){
+                            view.get().showReqResult("修改成功");
+                        }else {
+                            view.get().showReqResult("修改失败");
                         }
                     }
 

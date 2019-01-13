@@ -6,10 +6,15 @@ import com.example.chand.traveltogether.model.Activity;
 import com.example.chand.traveltogether.model.LoginReq;
 import com.example.chand.traveltogether.model.RegisterReq;
 import com.example.chand.traveltogether.model.ReqJoinActivity;
+import com.example.chand.traveltogether.model.ReqQuitActivity;
+import com.example.chand.traveltogether.model.ReqUpload;
 import com.example.chand.traveltogether.model.UpdateUserTextInfoReq;
 import com.example.chand.traveltogether.model.User;
 
+import java.io.File;
+
 import io.reactivex.Observable;
+import okhttp3.MultipartBody;
 
 
 public class RequestManager {
@@ -58,5 +63,13 @@ public class RequestManager {
 
     public Observable<Activity> getTypeActivities(String type) {
         return mRetrofitService.getTypeActivities(type);
+    }
+
+    public Observable<ReqQuitActivity> requestQuitActivity(String account) {
+        return mRetrofitService.requestQuitActivity(account);
+    }
+
+    public Observable<ReqUpload> requestUpload(String account, int item, MultipartBody.Part file) {
+        return mRetrofitService.requestUpload(account, item, file);
     }
 }

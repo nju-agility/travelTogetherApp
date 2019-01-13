@@ -1,5 +1,6 @@
 package com.example.chand.traveltogether.view.Activity;
 
+
 import android.app.ActionBar;
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,10 +15,12 @@ import com.example.chand.traveltogether.R;
 import com.example.chand.traveltogether.Utils.SharedHelper;
 import com.example.chand.traveltogether.adapter.CardDecoration;
 import com.example.chand.traveltogether.adapter.HistoryAdapter;
+import com.example.chand.traveltogether.adapter.ResultAdapter;
 import com.example.chand.traveltogether.model.ActivityEntity;
-import com.example.chand.traveltogether.presenter.HistoryPresenter;
-import com.example.chand.traveltogether.presenter.Interface.IHistoryPresenter;
-import com.example.chand.traveltogether.view.Interface.IHistoryView;
+import com.example.chand.traveltogether.presenter.Interface.ISearchResultPresenter;
+import com.example.chand.traveltogether.presenter.SearchResultPresenter;
+import com.example.chand.traveltogether.view.Interface.IPersonCenterView;
+import com.example.chand.traveltogether.view.Interface.ISearchResultView;
 
 import java.util.ArrayList;
 
@@ -25,43 +28,50 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
-public class HistoryActivity extends BaseActivity implements IHistoryView {
-    private IHistoryPresenter presenter;
-    private HistoryAdapter adapter;
+public class SearchResultActivity extends BaseActivity implements ISearchResultView {
+    private ISearchResultPresenter presenter;
+    private ResultAdapter adapter;
     private ArrayList<ActivityEntity> entities;
-    Unbinder unbinder;
 
-    @BindView(R.id.history_list)
+    @BindView(R.id.search_result_list)
     RecyclerView recyclerView;
-
+    Unbinder unbinder;
     @Override
     protected void initialData() {
-        setContentView(R.layout.activity_history);
+        setContentView(R.layout.activity_searchresult);
         unbinder = ButterKnife.bind(this);
-        presenter = new HistoryPresenter(this);
+        presenter = new SearchResultPresenter(this);
+
+        String theme = getIntent().getStringExtra("theme");
 
         ActionBar actionBar = getActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
 
-        adapter = new HistoryAdapter(new ArrayList<ActivityEntity>(), this);
+        adapter = new ResultAdapter(new ArrayList<ActivityEntity>(), this);
 
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.addItemDecoration(new CardDecoration());
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        adapter.setOnItemClickListener(new HistoryAdapter.OnItemClickListener() {
+        adapter.setOnItemClickListener(new ResultAdapter.OnItemClickListener() {
             @Override
             public void OnItemClick(View v, int position) {
                 ActivityEntity obj = entities.get(position);
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("activity", obj);
-                bundle.putInt("type", 2);
-                Intent intent = new Intent(HistoryActivity.this, DetailActivity.class);
+                boolean type = SharedHelper.getSharedHelper().getBool("doing", false);
+                if(type){
+                    bundle.putInt("type", 4);
+                }else {
+                    bundle.putInt("type", 1);
+                }
+                Intent intent = new Intent(SearchResultActivity.this, DetailActivity.class);
                 intent.putExtras(bundle);
                 startActivity(intent);
             }
         });
         recyclerView.setAdapter(adapter);
-        presenter.requestHistoryRecord(SharedHelper.getSharedHelper().getAccount());
+        presenter.searchTypeActivities(theme);
+
     }
 
     @Override
@@ -71,20 +81,9 @@ public class HistoryActivity extends BaseActivity implements IHistoryView {
 
     @Override
     protected void destroyData() {
-        unbinder.unbind();
+
     }
 
-    @Override
-    public void setPerformanceData(ArrayList<ActivityEntity> entities) {
-        this.entities = entities;
-        adapter.updateSourceData(this.entities);
-//        recyclerView.setAdapter(adapter);
-    }
-
-    @Override
-    public void showError(String s) {
-        Toast.makeText(this, s, Toast.LENGTH_SHORT).show();
-    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -97,5 +96,16 @@ public class HistoryActivity extends BaseActivity implements IHistoryView {
                 return true;
             }
         }
+    }
+
+    @Override
+    public void setPerformanceData(ArrayList<ActivityEntity> activityEntities) {
+        this.entities = activityEntities;
+        adapter.updateSourceData(this.entities);
+    }
+
+    @Override
+    public void showError(String s) {
+        Toast.makeText(this,s,Toast.LENGTH_SHORT).show();
     }
 }

@@ -1,7 +1,5 @@
 package com.example.chand.traveltogether.model;
 
-import java.util.ArrayList;
-import java.util.List;
 
 public class UserContent {
     private UserEntity content;

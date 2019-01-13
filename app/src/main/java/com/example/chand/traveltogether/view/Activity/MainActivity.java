@@ -2,7 +2,6 @@ package com.example.chand.traveltogether.view.Activity;
 
 import android.app.ActionBar;
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -18,12 +17,11 @@ import com.bumptech.glide.Glide;
 import com.example.chand.traveltogether.R;
 import com.example.chand.traveltogether.Utils.SharedHelper;
 import com.example.chand.traveltogether.adapter.FragmentAdapter;
-import com.example.chand.traveltogether.application.TravelApplication;
 import com.example.chand.traveltogether.model.ActivityEntity;
 import com.example.chand.traveltogether.model.UserEntity;
 import com.example.chand.traveltogether.presenter.Interface.IMainPresenter;
 import com.example.chand.traveltogether.presenter.MainPresenter;
-import com.example.chand.traveltogether.view.Fragment.ManagementFragment;
+import com.example.chand.traveltogether.view.Fragment.SearchFragment;
 import com.example.chand.traveltogether.view.Fragment.RecommendFragment;
 import com.example.chand.traveltogether.view.Interface.IMainView;
 
@@ -34,7 +32,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
-import io.reactivex.schedulers.Schedulers;
 
 public class MainActivity extends FragmentActivity implements IMainView {
     List<Fragment> fragments;
@@ -104,10 +101,10 @@ public class MainActivity extends FragmentActivity implements IMainView {
         actionBar.setLogo(R.drawable.travel);
         actionBar.setDisplayUseLogoEnabled(true);
         Fragment recommendFragment = new RecommendFragment();
-        Fragment managementFragment = new ManagementFragment();
+        Fragment searchResultFragment = new SearchFragment();
         fragments = new ArrayList<>();
         fragments.add(recommendFragment);
-        fragments.add(managementFragment);
+        fragments.add(searchResultFragment);
         FragmentAdapter fragmentAdapter = new FragmentAdapter(getSupportFragmentManager(), fragments);
         pager.setAdapter(fragmentAdapter);
         pager.setCurrentItem(0);
@@ -135,8 +132,6 @@ public class MainActivity extends FragmentActivity implements IMainView {
         accountStr = SharedHelper.getSharedHelper().getStr("account", "账号");
         nameStr = SharedHelper.getSharedHelper().getStr("name", "用户名");
         String url = SharedHelper.getSharedHelper().getStr("userPic", "");
-//        System.out.println("URL ----------->" + url);
-//        System.out.println(url.equals(""));
         if (url.equals("/image/Dont't find image!") || url.equals("")) {
             Glide.with(this).load(R.drawable.testpic).into(picIV);
         } else {
@@ -187,14 +182,14 @@ public class MainActivity extends FragmentActivity implements IMainView {
                 break;
             }
             case R.id.user_current: {
-                if(null!=this.current){
+                if (null != this.current) {
                     Bundle bundle = new Bundle();
                     bundle.putSerializable("activity", this.current);
                     bundle.putInt("type", 3);
                     intent = new Intent(MainActivity.this, DetailActivity.class);
                     intent.putExtras(bundle);
                     startActivity(intent);
-                }else {
+                } else {
                     Toast.makeText(this, "没有正在进行中的活动", Toast.LENGTH_SHORT).show();
                 }
                 break;
@@ -242,5 +237,9 @@ public class MainActivity extends FragmentActivity implements IMainView {
     @Override
     public void showError(String s) {
         System.out.println(s);
+        if(s.equals("没有正在进行的活动")){
+            this.current = null;
+            SharedHelper.getSharedHelper().setBool("doing", false);
+        }
     }
 }

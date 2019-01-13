@@ -21,14 +21,14 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class ResultAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private List<ActivityEntity> activities;
     private LayoutInflater mInflater;
     private OnItemClickListener onItemClickListener;
     private final int NO_DATA = 0, OFFICIAL = 1, UNOFFICIAL = 2;
     private WeakReference<Context> mcontext;
 
-    public RecyclerAdapter(List<ActivityEntity> list, Context context) {
+    public ResultAdapter(List<ActivityEntity> list, Context context) {
         activities = list;
         mcontext = new WeakReference<>(context);
     }
@@ -42,7 +42,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         RecyclerView.ViewHolder mHolder = null;
         switch (i) {
             case NO_DATA:
-                mHolder = new ImageViewHolder(mInflater.inflate(R.layout.cardview_nodata, viewGroup, false));
+                mHolder = new ImageViewHolder(mInflater.inflate(R.layout.cardview_nodata_history, viewGroup, false));
                 break;
             case OFFICIAL:
                 mHolder = new ImageViewHolder(mInflater.inflate(R.layout.cardview_official, viewGroup, false));
@@ -75,7 +75,9 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                 break;
             case UNOFFICIAL:
                 UnOfficialHolder holder = (UnOfficialHolder) viewHolder;
+//                holder.activity_pic.setImageResource(R.drawable.testactivitypic);
                 String url = activities.get(i).getActivityURL();
+
                 boolean exits = url != null;
                 if (!exits||url.equals("/image/Dont't find image!") || url.equals("")) {
                     Glide.with(mcontext.get()).load(R.drawable.testactivitypic).into(holder.activity_pic);

@@ -41,7 +41,7 @@ public class LoginPresenter implements ILoginPresenter {
                     .subscribe(new Observer<LoginReq>() {
                         @Override
                         public void onError(Throwable e) {
-
+                            System.out.println(e);
                         }
 
                         @Override

@@ -15,6 +15,24 @@ public class ActivityEntity implements Serializable {
     private Integer score;
     private Integer num_of_score;
     private String type;
+    private int price;
+    private String activityURL;
+
+    public int getPrice() {
+        return price;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
+    }
+
+    public String getActivityURL() {
+        return activityURL;
+    }
+
+    public void setActivityURL(String activityURL) {
+        this.activityURL = activityURL;
+    }
 
     public Integer getAid() {
         return aid;
@@ -127,6 +145,8 @@ public class ActivityEntity implements Serializable {
                 ", score=" + score +
                 ", num_of_score=" + num_of_score +
                 ", type='" + type + '\'' +
+                ", price=" + price +
+                ", activityURL='" + activityURL + '\'' +
                 '}';
     }
 }

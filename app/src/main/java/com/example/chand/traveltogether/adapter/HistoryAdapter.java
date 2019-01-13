@@ -76,12 +76,19 @@ public class HistoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             case UNOFFICIAL:
                 UnOfficialHolder holder = (UnOfficialHolder) viewHolder;
 //                holder.activity_history_pic.setImageResource(R.drawable.testactivitypic);
-                Glide.with(mcontext.get()).load(R.drawable.testactivitypic).into(holder.activity_history_pic);
+                String url = activities.get(i).getActivityURL();
+                boolean exits = url != null;
+                if (!exits||url.equals("/image/Dont't find image!") || url.equals("")) {
+                    Glide.with(mcontext.get()).load(R.drawable.testactivitypic).into(holder.activity_history_pic);
+                }else {
+                    Glide.with(mcontext.get()).load(mcontext.get().getString(R.string.base_url) + url).into(holder.activity_history_pic);
+                }
                 holder.activity_history_title.setText(activities.get(i).getTitle());
                 holder.activity_history_city.setText(activities.get(i).getCity() + "  " + activities.get(i).getLocation());
                 holder.activity_history_time.setText(activities.get(i).getTime_start() + " -- " + activities.get(i).getTime_end());
                 holder.activity_history_owner.setText(activities.get(i).getOwner());
                 holder.activity_history_theme.setText(activities.get(i).getType());
+                holder.activity_history_status.setText("已结束");
                 holder.cardView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -95,7 +102,9 @@ public class HistoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     }
 
     public void updateSourceData(ArrayList<ActivityEntity> list) {
-        activities = list;
+        activities.clear();
+        activities.addAll(list);
+        this.notifyDataSetChanged();
     }
 
     @Override
@@ -144,6 +153,8 @@ public class HistoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         TextView activity_history_theme;
         @BindView(R.id.history_card_container)
         CardView cardView;
+        @BindView(R.id.activity_history_status)
+        TextView activity_history_status;
 
         public UnOfficialHolder(View itemView) {
             super(itemView);

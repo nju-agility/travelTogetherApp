@@ -3,6 +3,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.chand.traveltogether">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
     <application
         android:name=".application.TravelApplication"
         android:allowBackup="true"
@@ -12,7 +16,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        tools:replace="android:appComponentFactory">
+        tools:replace="android:appComponentFactory"
+        android:networkSecurityConfig="@xml/network_security_config">
         <activity
             android:name=".view.Activity.AdActivity"
             android:theme="@style/AppTheme.NoActionBarWithBackGround">
@@ -24,32 +29,35 @@
         </activity>
         <activity
             android:name=".view.Activity.LoginActivity"
-            android:theme="@style/AppTheme.Login"></activity>
+            android:theme="@style/AppTheme.Login" />
         <activity
             android:name=".view.Activity.MainActivity"
-            android:theme="@style/AppTheme.Detail"
-            android:label="一起去旅游！"></activity>
+            android:label="一起去旅游！"
+            android:theme="@style/AppTheme.Detail" />
         <activity
             android:name=".view.Activity.RegisterActivity"
-            android:theme="@style/AppTheme.Login"></activity>
+            android:theme="@style/AppTheme.Login" />
         <activity
-            android:name=".view.Activity.SearchActivity"
-            android:theme="@style/AppTheme.Main"></activity>
+            android:name=".view.Activity.SearchResultActivity"
+            android:theme="@style/AppTheme.Detail" />
         <activity
             android:name=".view.Activity.PersonCenterActivity"
-            android:theme="@style/AppTheme.Detail"
-            android:label="个人中心" />
-        <activity android:name=".view.Activity.DetailActivity"
-            android:theme="@style/AppTheme.AppDetail"
-            android:label="活动详情"/>
-        <activity android:name=".view.Activity.HistoryActivity"
-            android:theme="@style/AppTheme.Detail"
-            android:label="历史记录"/>
+            android:label="个人中心"
+            android:theme="@style/AppTheme.Detail" />
+        <activity
+            android:name=".view.Activity.DetailActivity"
+            android:label="活动详情"
+            android:theme="@style/AppTheme.AppDetail" />
+        <activity
+            android:name=".view.Activity.HistoryActivity"
+            android:label="历史记录"
+            android:theme="@style/AppTheme.Detail" />
+        <activity
+            android:configChanges="orientation|screenSize"
+            android:name="me.nereo.multi_image_selector.MultiImageSelectorActivity" />
+        <meta-data
+            android:name="com.google.android.actions"
+            android:resource="@xml/network_security_config" />
     </application>
-
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-
 
 </manifest>

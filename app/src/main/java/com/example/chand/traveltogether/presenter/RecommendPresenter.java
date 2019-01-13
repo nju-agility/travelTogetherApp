@@ -37,9 +37,14 @@ public class RecommendPresenter implements IRecommendPresenter {
 
                     @Override
                     public void onNext(Activity activity) {
+                        System.out.println(activity.toString());
                         if (activity.getResCode() == 0) {
-                            list = activity.getData().getContent();
-                            view.get().setPerformanceData(list);
+                            if(activity.getData().getContent().size()>0){
+                                list = activity.getData().getContent();
+                                view.get().setPerformanceData(list);
+                            }else {
+                                view.get().showError("没有更多的结果了");
+                            }
                         }else {
                             view.get().showError("没有更多的结果了");
                         }
@@ -47,7 +52,7 @@ public class RecommendPresenter implements IRecommendPresenter {
 
                     @Override
                     public void onError(Throwable e) {
-
+                        System.out.println(e);
                     }
 
                     @Override

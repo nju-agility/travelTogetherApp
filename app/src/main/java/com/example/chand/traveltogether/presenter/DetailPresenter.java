@@ -2,6 +2,7 @@ package com.example.chand.traveltogether.presenter;
 
 import com.example.chand.traveltogether.Utils.RequestManager;
 import com.example.chand.traveltogether.model.ReqJoinActivity;
+import com.example.chand.traveltogether.model.ReqQuitActivity;
 import com.example.chand.traveltogether.presenter.Interface.IDetailPresenter;
 import com.example.chand.traveltogether.view.Interface.IDetailView;
 
@@ -55,6 +56,34 @@ public class DetailPresenter implements IDetailPresenter {
 
     @Override
     public void reqCancelActivity(String account) {
+        manager.requestQuitActivity(account)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<ReqQuitActivity>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
 
+                    }
+
+                    @Override
+                    public void onNext(ReqQuitActivity reqQuitActivity) {
+                        System.out.println(reqQuitActivity);
+                        if (reqQuitActivity.getResCode() == 0) {
+                            view.get().cancelSuccess();
+                        } else {
+                            view.get().showError(reqQuitActivity.getResMsg());
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        System.out.println(e);
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
     }
 }

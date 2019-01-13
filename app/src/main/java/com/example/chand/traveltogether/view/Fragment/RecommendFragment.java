@@ -85,8 +85,8 @@ public class RecommendFragment extends BaseFragment implements IRecommendView {
             }
         });
         recyclerView.setAdapter(adapter);
-        swipeRefreshLayout.setRefreshing(true);
-        presenter.doGetRecommendActivity();
+//        swipeRefreshLayout.setRefreshing(true);
+//        presenter.doGetRecommendActivity();
 
     }
 
@@ -101,7 +101,7 @@ public class RecommendFragment extends BaseFragment implements IRecommendView {
     public void setPerformanceData(ArrayList<ActivityEntity> entities) {
         this.entities = entities;
         adapter.updateSourceData(this.entities);
-        recyclerView.setAdapter(adapter);
+//        recyclerView.setAdapter(adapter);
     }
 
     @Override

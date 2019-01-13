@@ -1,6 +1,7 @@
 package com.example.chand.traveltogether.view.Activity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -102,7 +103,8 @@ public class DetailActivity extends AppCompatActivity implements ObservableScrol
             Toast.makeText(this, "申请加入活动", Toast.LENGTH_SHORT).show();
             presenter.reqJoinActivity(SharedHelper.getSharedHelper().getAccount(), activityEntity.getAid());
         } else if (type == 3) {
-            Toast.makeText(this, "取消活动", Toast.LENGTH_SHORT).show();
+            presenter.reqCancelActivity(SharedHelper.getSharedHelper().getAccount());
+            Toast.makeText(this, "申请取消活动", Toast.LENGTH_SHORT).show();
         }
     }
 
