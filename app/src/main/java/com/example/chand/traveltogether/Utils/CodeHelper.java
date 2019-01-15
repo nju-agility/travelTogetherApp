@@ -1,7 +1,10 @@
 package com.example.chand.traveltogether.Utils;
 
 
+import android.content.Context;
 import android.util.Base64;
+
+import com.bumptech.glide.Glide;
 
 public class CodeHelper {
     private static volatile CodeHelper codeHelper = new CodeHelper();
@@ -19,6 +22,11 @@ public class CodeHelper {
 
     public String decode(String s){
         return new String(Base64.decode(s.getBytes(), Base64.DEFAULT));
+    }
+
+    public static void clear(Context context){
+        Glide.get(context).clearMemory();
+//        Glide.get(context).clearDiskCache();
     }
 
 }

@@ -16,12 +16,15 @@ import com.example.chand.traveltogether.adapter.RecyclerAdapter;
 import com.example.chand.traveltogether.model.ActivityEntity;
 import com.example.chand.traveltogether.presenter.Interface.IRecommendPresenter;
 import com.example.chand.traveltogether.presenter.RecommendPresenter;
+import com.example.chand.traveltogether.view.Activity.CreateActivity;
 import com.example.chand.traveltogether.view.Activity.DetailActivity;
 import com.example.chand.traveltogether.view.Fragment.Interface.IRecommendView;
+import com.melnykov.fab.FloatingActionButton;
 
 import java.util.ArrayList;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 import jp.co.recruit_lifestyle.android.widget.WaveSwipeRefreshLayout;
 
 public class RecommendFragment extends BaseFragment implements IRecommendView {
@@ -32,8 +35,6 @@ public class RecommendFragment extends BaseFragment implements IRecommendView {
     WaveSwipeRefreshLayout swipeRefreshLayout;
     @BindView(R.id.recommend_list)
     RecyclerView recyclerView;
-//    @BindView(R.id.recommend_fab)
-//    FloatingActionButton floatingActionButton;
 
     @Override
     public void initalData() {
@@ -74,9 +75,9 @@ public class RecommendFragment extends BaseFragment implements IRecommendView {
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("activity", obj);
                 boolean type = SharedHelper.getSharedHelper().getBool("doing", false);
-                if(type){
+                if (type) {
                     bundle.putInt("type", 4);
-                }else {
+                } else {
                     bundle.putInt("type", 1);
                 }
                 Intent intent = new Intent(getActivity(), DetailActivity.class);
@@ -89,6 +90,8 @@ public class RecommendFragment extends BaseFragment implements IRecommendView {
 //        presenter.doGetRecommendActivity();
 
     }
+
+
 
     @Override
     public void onResume() {

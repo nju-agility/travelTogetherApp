@@ -9,6 +9,8 @@ public class Validator {
      */
     public static final String REGEX_USERNAME = "^[a-zA-Z\u4e00-\u9fa5]\\w{1,15}$";
 
+    public static final String REGEX_NUM = "^(0|[1-9][0-9]*)$";
+
     /**
      * 正则表达式：验证密码
      */
@@ -58,6 +60,10 @@ public class Validator {
      */
     public static boolean isUsername(String username) {
         return Pattern.matches(REGEX_USERNAME, username);
+    }
+
+    public static boolean isNum(String num){
+        return Pattern.matches(REGEX_NUM, num);
     }
 
     /**

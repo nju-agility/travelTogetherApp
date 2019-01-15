@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.chand.traveltogether.R;
+import com.example.chand.traveltogether.Utils.CodeHelper;
 import com.example.chand.traveltogether.Utils.SharedHelper;
 import com.example.chand.traveltogether.model.ActivityEntity;
 import com.example.chand.traveltogether.presenter.DetailPresenter;
@@ -47,6 +48,8 @@ public class DetailActivity extends AppCompatActivity implements ObservableScrol
     TextView detail_title;
     @BindView(R.id.join_btn)
     Button button;
+    @BindView(R.id.cost_number)
+    TextView detail_cost;
     Unbinder unbinder;
     ActivityEntity activityEntity;
     private int type;
@@ -70,6 +73,7 @@ public class DetailActivity extends AppCompatActivity implements ObservableScrol
 
 
     public void initialContent(int type) {
+        CodeHelper.clear(this);
         if (null != activityEntity) {
             Glide.with(this).load(R.drawable.testactivitypic).into(detail_img);
             detail_city.setText(activityEntity.getCity() + " " + activityEntity.getLocation());
@@ -78,6 +82,7 @@ public class DetailActivity extends AppCompatActivity implements ObservableScrol
             detail_owner.setText(activityEntity.getOwner());
             detail_title.setText(activityEntity.getTitle());
             detail_time.setText(activityEntity.getTime_start() + " " + activityEntity.getTime_end());
+            detail_cost.setText(activityEntity.getPrice() + " 元");
         }
 
         if (type == 1) {

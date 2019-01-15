@@ -3,6 +3,7 @@ package com.example.chand.traveltogether.Utils;
 import com.example.chand.traveltogether.model.Activity;
 import com.example.chand.traveltogether.model.LoginReq;
 import com.example.chand.traveltogether.model.RegisterReq;
+import com.example.chand.traveltogether.model.ReqAddActivity;
 import com.example.chand.traveltogether.model.ReqJoinActivity;
 import com.example.chand.traveltogether.model.ReqQuitActivity;
 import com.example.chand.traveltogether.model.ReqUpload;
@@ -57,5 +58,11 @@ public interface RetrofitService {
     @Multipart
     @POST("/api/uploadImg")
     Observable<ReqUpload> requestUpload(@Part("account")String account, @Part("item")int item, @Part MultipartBody.Part file);
+
+    @FormUrlEncoded
+    @POST("/api/addActivity")
+    Observable<ReqAddActivity> requestAddActivity(@Field("owner")String account,@Field("city")String city,@Field("location")String location,
+                                                  @Field("title")String title,@Field("details")String details,@Field("time_start")String time_start,
+                                                  @Field("time_end")String time_end,@Field("type")String type,@Field("price")int price);
 
 }

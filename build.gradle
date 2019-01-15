@@ -21,6 +21,9 @@ buildscript {
 //        classpath 'com.jakewharton:butterknife-gradle-plugin:10.0.0'
     }
 }
+plugins{
+    id "org.sonarqube" version "2.6"
+}
 
 allprojects {
     repositories {

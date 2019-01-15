@@ -5,6 +5,7 @@ import com.example.chand.traveltogether.application.TravelApplication;
 import com.example.chand.traveltogether.model.Activity;
 import com.example.chand.traveltogether.model.LoginReq;
 import com.example.chand.traveltogether.model.RegisterReq;
+import com.example.chand.traveltogether.model.ReqAddActivity;
 import com.example.chand.traveltogether.model.ReqJoinActivity;
 import com.example.chand.traveltogether.model.ReqQuitActivity;
 import com.example.chand.traveltogether.model.ReqUpload;
@@ -15,6 +16,7 @@ import java.io.File;
 
 import io.reactivex.Observable;
 import okhttp3.MultipartBody;
+import retrofit2.http.Part;
 
 
 public class RequestManager {
@@ -71,5 +73,10 @@ public class RequestManager {
 
     public Observable<ReqUpload> requestUpload(String account, int item, MultipartBody.Part file) {
         return mRetrofitService.requestUpload(account, item, file);
+    }
+
+    public Observable<ReqAddActivity> requestAddActivity(String account, String city, String location, String title,
+                                                         String details, String time_start, String time_end, String type, int price) {
+        return mRetrofitService.requestAddActivity(account, city, location, title, details, time_start, time_end, type, price);
     }
 }

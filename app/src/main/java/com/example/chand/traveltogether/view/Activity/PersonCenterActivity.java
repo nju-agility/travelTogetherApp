@@ -21,6 +21,7 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.chand.traveltogether.R;
+import com.example.chand.traveltogether.Utils.CodeHelper;
 import com.example.chand.traveltogether.Utils.SharedHelper;
 import com.example.chand.traveltogether.Utils.Validator;
 import com.example.chand.traveltogether.presenter.PersonCenterPresenter;
@@ -28,7 +29,6 @@ import com.example.chand.traveltogether.view.Interface.IPersonCenterView;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -61,11 +61,10 @@ public class PersonCenterActivity extends BaseActivity implements IPersonCenterV
     ImageView picIv;
     Unbinder unbinder;
 
-    final String USER_CODE = "";
     private PersonCenterPresenter presenter;
     final int REQUEST_CODE_CHOOSE = 100;
     private ArrayList<String> urls;
-    private String[] permissions = {Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE};
+
 
     @Override
     protected void initialData() {
@@ -76,21 +75,20 @@ public class PersonCenterActivity extends BaseActivity implements IPersonCenterV
         presenter = new PersonCenterPresenter(this);
         loadDataFromSharedPreference();
 
-        for(String s:permissions){
-            int i = ContextCompat.checkSelfPermission(this, s);
-            // 权限是否已经 授权 GRANTED---授权  DINIED---拒绝
-            if (i != PackageManager.PERMISSION_GRANTED) {
-                // 如果没有授予该权限，就去提示用户请求
-                ActivityCompat.requestPermissions(this, permissions, 999);
-            }
-        }
+
         ActionBar actionBar = getActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
 
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        loadDataFromSharedPreference();
+    }
 
     public void loadDataFromSharedPreference() {
+        CodeHelper.clear(this);
         accountTv.setText(SharedHelper.getSharedHelper().getStr("account", "账号"));
         ageTv.setText(SharedHelper.getSharedHelper().getInt("age", 18) + "");
         cityTv.setText(SharedHelper.getSharedHelper().getStr("city", "地球村"));
@@ -107,7 +105,7 @@ public class PersonCenterActivity extends BaseActivity implements IPersonCenterV
         }
         passwordTv.setText(stringBuffer.toString());
         schoolTv.setText(SharedHelper.getSharedHelper().getStr("school", "南京大学"));
-        nameTv.setText(SharedHelper.getSharedHelper().getStr("name", "垃圾翔"));
+        nameTv.setText(SharedHelper.getSharedHelper().getStr("name", "啊翔"));
         scoreTv.setText(SharedHelper.getSharedHelper().getInt("score", 100) + "");
         if (SharedHelper.getSharedHelper().getStr("userPic", "/image/Dont't find image!").equals("/image/Dont't find image!")) {
             Glide.with(this).load(R.drawable.testpic).into(picIv);
@@ -170,7 +168,7 @@ public class PersonCenterActivity extends BaseActivity implements IPersonCenterV
 
     private AlertDialog.Builder getDialog(String title, String content) {
         AlertDialog.Builder normalDialog =
-                new AlertDialog.Builder(PersonCenterActivity.this, 5);
+                new AlertDialog.Builder(PersonCenterActivity.this, 0);
         normalDialog.setIcon(R.drawable.modifyicon).setTitle(title).setMessage(content);
         return normalDialog;
     }
@@ -198,8 +196,10 @@ public class PersonCenterActivity extends BaseActivity implements IPersonCenterV
                         RequestBody.create(MediaType.parse("multipart/form-data"), file);
 
                 // MultipartBody.Part  和后端约定好Key，这里的partName是用image
+                System.out.println(file.getName());
                 MultipartBody.Part body =
                         MultipartBody.Part.createFormData("file", file.getName(), requestFile);
+                System.out.println(SharedHelper.getSharedHelper().getAccount());
 
                 presenter.requestUpdateIcon(SharedHelper.getSharedHelper().getAccount(),body);
 
@@ -352,7 +352,7 @@ public class PersonCenterActivity extends BaseActivity implements IPersonCenterV
     public void changeGender(View view) {
         final String[] list = {"男", "女"};
         AlertDialog.Builder dialog =
-                new AlertDialog.Builder(PersonCenterActivity.this, 5);
+                new AlertDialog.Builder(PersonCenterActivity.this, 0);
         dialog.setIcon(R.drawable.modifyicon).setTitle("选择性别");
         final int[] type = {0};
         dialog.setSingleChoiceItems(list, 0, new DialogInterface.OnClickListener() {

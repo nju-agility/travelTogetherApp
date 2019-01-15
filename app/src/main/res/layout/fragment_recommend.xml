@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <jp.co.recruit_lifestyle.android.widget.WaveSwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:fab="http://schemas.android.com/tools"
     android:id="@+id/recommend_swipe"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -12,6 +13,22 @@
         android:layout_height="match_parent">
 
     </android.support.v7.widget.RecyclerView>
+
+    <!--<android.support.design.widget.FloatingActionButton-->
+        <!--android:id="@+id/recommend_fab"-->
+        <!--android:layout_width="48dp"-->
+        <!--android:layout_height="48dp"-->
+        <!--android:layout_margin="16dp"-->
+        <!--android:padding="8dp"-->
+        <!--android:src="@drawable/search"-->
+        <!--app:backgroundTint="#8CBBB1"-->
+        <!--app:borderWidth="0dp"-->
+        <!--app:elevation="6dp"-->
+        <!--app:fabSize="normal"-->
+        <!--app:layout_anchor="@id/recommend_list"-->
+        <!--app:layout_anchorGravity="bottom|right"-->
+        <!--app:pressedTranslationZ="12dp" />-->
+
     <!--<com.melnykov.fab.FloatingActionButton-->
     <!--android:id="@+id/recommend_fab"-->
     <!--android:layout_width="40dp"-->

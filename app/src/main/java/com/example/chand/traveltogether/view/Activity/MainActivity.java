@@ -1,11 +1,15 @@
 package com.example.chand.traveltogether.view.Activity;
 
+import android.Manifest;
 import android.app.ActionBar;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.widget.ImageView;
@@ -15,6 +19,7 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.chand.traveltogether.R;
+import com.example.chand.traveltogether.Utils.CodeHelper;
 import com.example.chand.traveltogether.Utils.SharedHelper;
 import com.example.chand.traveltogether.adapter.FragmentAdapter;
 import com.example.chand.traveltogether.model.ActivityEntity;
@@ -69,6 +74,7 @@ public class MainActivity extends FragmentActivity implements IMainView {
 
     private IMainPresenter presenter;
     private ActivityEntity current;
+    private String[] permissions = {Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE};
 
 //        mDrawer = (FlowingDrawer) findViewById(R.id.drawerlayout);
 //        mDrawer.setTouchMode(ElasticDrawer.TOUCH_MODE_BEZEL);
@@ -95,6 +101,14 @@ public class MainActivity extends FragmentActivity implements IMainView {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         unbinder = ButterKnife.bind(this);
+        for(String s:permissions){
+            int i = ContextCompat.checkSelfPermission(this, s);
+            // 权限是否已经 授权 GRANTED---授权  DINIED---拒绝
+            if (i != PackageManager.PERMISSION_GRANTED) {
+                // 如果没有授予该权限，就去提示用户请求
+                ActivityCompat.requestPermissions(this, permissions, 999);
+            }
+        }
         presenter = new MainPresenter(this);
         ActionBar actionBar = getActionBar();
         actionBar.setDisplayShowHomeEnabled(true);
@@ -129,6 +143,7 @@ public class MainActivity extends FragmentActivity implements IMainView {
     @Override
     protected void onResume() {
         super.onResume();
+        CodeHelper.clear(this);
         accountStr = SharedHelper.getSharedHelper().getStr("account", "账号");
         nameStr = SharedHelper.getSharedHelper().getStr("name", "用户名");
         String url = SharedHelper.getSharedHelper().getStr("userPic", "");
@@ -140,6 +155,7 @@ public class MainActivity extends FragmentActivity implements IMainView {
         accountTv.setText(accountStr);
         nameTv.setText(nameStr);
         presenter.getUserInfo(SharedHelper.getSharedHelper().getAccount());
+//        CodeHelper.clear(this);
     }
 
     @Override
@@ -151,6 +167,16 @@ public class MainActivity extends FragmentActivity implements IMainView {
     protected void onDestroy() {
         super.onDestroy();
         unbinder.unbind();
+    }
+
+    @OnClick(R.id.user_create_activity)
+    public void goCreateActivity(View view) {
+        if (SharedHelper.getSharedHelper().getBool("doing", true)) {
+            Toast.makeText(this, "已经有活动正在进行", Toast.LENGTH_SHORT).show();
+        } else {
+            Intent intent = new Intent(MainActivity.this, CreateActivity.class);
+            startActivity(intent);
+        }
     }
 
 
@@ -222,7 +248,7 @@ public class MainActivity extends FragmentActivity implements IMainView {
         SharedHelper.getSharedHelper().setInt("gender", entity.getGender());
         SharedHelper.getSharedHelper().setInt("score", entity.getScore());
         SharedHelper.getSharedHelper().setStr("school", entity.getSchool());
-        SharedHelper.getSharedHelper().setStr("userPic", entity.getHeadURL());
+        SharedHelper.getSharedHelper().setStr("userPic", getString(R.string.base_url) + entity.getHeadURL());
         SharedHelper.getSharedHelper().setInt("activity_id", entity.getActivity_id());
         SharedHelper.getSharedHelper().setBool("doing", false);
         presenter.getCurrentActivity(SharedHelper.getSharedHelper().getInt("activity_id", 0));

@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.example.chand.traveltogether.R;
+import com.example.chand.traveltogether.Utils.CodeHelper;
 import com.example.chand.traveltogether.Utils.SharedHelper;
 import com.example.chand.traveltogether.adapter.CardDecoration;
 import com.example.chand.traveltogether.adapter.HistoryAdapter;
@@ -39,6 +40,7 @@ public class HistoryActivity extends BaseActivity implements IHistoryView {
         setContentView(R.layout.activity_history);
         unbinder = ButterKnife.bind(this);
         presenter = new HistoryPresenter(this);
+//        CodeHelper.clear(this);
 
         ActionBar actionBar = getActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
