@@ -1,10 +1,10 @@
 package com.example.chand.traveltogether.presenter;
 
-import com.example.chand.traveltogether.Utils.RequestManager;
+import com.example.chand.traveltogether.utils.RequestManager;
 import com.example.chand.traveltogether.model.Activity;
 import com.example.chand.traveltogether.model.ActivityEntity;
-import com.example.chand.traveltogether.presenter.Interface.IRecommendPresenter;
-import com.example.chand.traveltogether.view.Fragment.Interface.IRecommendView;
+import com.example.chand.traveltogether.presenter.presenternterface.IRecommendPresenter;
+import com.example.chand.traveltogether.view.fragment.Interface.IRecommendView;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;

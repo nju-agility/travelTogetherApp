@@ -50,6 +50,9 @@ public class HistoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             case UNOFFICIAL:
                 mHolder = new UnOfficialHolder(mInflater.inflate(R.layout.cardview_unofficial_history, viewGroup, false));
                 break;
+            default:
+                mHolder = new ImageViewHolder(mInflater.inflate(R.layout.cardview_nodata_history, viewGroup, false));
+                break;
         }
         return mHolder;
     }
@@ -88,7 +91,16 @@ public class HistoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
                 holder.activity_history_time.setText(activities.get(i).getTime_start() + " -- " + activities.get(i).getTime_end());
                 holder.activity_history_owner.setText(activities.get(i).getOwner());
                 holder.activity_history_theme.setText(activities.get(i).getType());
-                holder.activity_history_status.setText("已结束");
+                int status = activities.get(i).getStatus();
+                switch (status){
+                    case 3:
+                        holder.activity_history_status.setText("已撤销");
+                        break;
+                    case 5:
+                        holder.activity_history_status.setText("已结束");
+                        break;
+                }
+
                 holder.cardView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {

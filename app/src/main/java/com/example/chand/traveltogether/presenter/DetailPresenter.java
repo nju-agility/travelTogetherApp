@@ -1,10 +1,10 @@
 package com.example.chand.traveltogether.presenter;
 
-import com.example.chand.traveltogether.Utils.RequestManager;
+import com.example.chand.traveltogether.utils.RequestManager;
 import com.example.chand.traveltogether.model.ReqJoinActivity;
 import com.example.chand.traveltogether.model.ReqQuitActivity;
-import com.example.chand.traveltogether.presenter.Interface.IDetailPresenter;
-import com.example.chand.traveltogether.view.Interface.IDetailView;
+import com.example.chand.traveltogether.presenter.presenternterface.IDetailPresenter;
+import com.example.chand.traveltogether.view.viewinterface.IDetailView;
 
 import java.lang.ref.WeakReference;
 

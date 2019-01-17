@@ -50,6 +50,9 @@ public class ResultAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             case UNOFFICIAL:
                 mHolder = new UnOfficialHolder(mInflater.inflate(R.layout.cardview_unofficial, viewGroup, false));
                 break;
+            default:
+                mHolder = new ImageViewHolder(mInflater.inflate(R.layout.cardview_nodata_history, viewGroup, false));
+                break;
         }
         return mHolder;
     }

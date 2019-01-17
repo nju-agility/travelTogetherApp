@@ -1,12 +1,10 @@
 package com.example.chand.traveltogether.presenter;
 
-import android.widget.Toast;
-
-import com.example.chand.traveltogether.Utils.RequestManager;
+import com.example.chand.traveltogether.utils.RequestManager;
 import com.example.chand.traveltogether.model.ReqAddActivity;
 import com.example.chand.traveltogether.model.ReqUpload;
-import com.example.chand.traveltogether.presenter.Interface.ICreatePresenter;
-import com.example.chand.traveltogether.view.Interface.ICreateView;
+import com.example.chand.traveltogether.presenter.presenternterface.ICreatePresenter;
+import com.example.chand.traveltogether.view.viewinterface.ICreateView;
 
 import java.lang.ref.WeakReference;
 

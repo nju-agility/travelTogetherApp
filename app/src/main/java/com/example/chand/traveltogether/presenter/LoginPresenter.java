@@ -1,12 +1,12 @@
 package com.example.chand.traveltogether.presenter;
 
 
-import com.example.chand.traveltogether.Utils.RequestManager;
-import com.example.chand.traveltogether.Utils.SharedHelper;
-import com.example.chand.traveltogether.Utils.Validator;
+import com.example.chand.traveltogether.utils.RequestManager;
+import com.example.chand.traveltogether.utils.SharedHelper;
+import com.example.chand.traveltogether.utils.Validator;
 import com.example.chand.traveltogether.model.LoginReq;
-import com.example.chand.traveltogether.presenter.Interface.ILoginPresenter;
-import com.example.chand.traveltogether.view.Interface.ILoginView;
+import com.example.chand.traveltogether.presenter.presenternterface.ILoginPresenter;
+import com.example.chand.traveltogether.view.viewinterface.ILoginView;
 
 import java.lang.ref.WeakReference;
 
@@ -32,7 +32,7 @@ public class LoginPresenter implements ILoginPresenter {
 
         if (!Validator.isEmail(account)) {
             view.get().showResult("请输入正确的邮箱账号");
-        } else if (!Validator.isPassword(password)) {
+        } else if (!Validator.isUserPass(password)) {
             view.get().showResult("密码长度应为8位至20位");
         } else {
             manager.getUserLogin(account, password)

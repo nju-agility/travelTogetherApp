@@ -1,11 +1,11 @@
 package com.example.chand.traveltogether.presenter;
 
-import com.example.chand.traveltogether.Utils.RequestManager;
-import com.example.chand.traveltogether.Utils.SharedHelper;
-import com.example.chand.traveltogether.Utils.Validator;
+import com.example.chand.traveltogether.utils.RequestManager;
+import com.example.chand.traveltogether.utils.SharedHelper;
+import com.example.chand.traveltogether.utils.Validator;
 import com.example.chand.traveltogether.model.RegisterReq;
-import com.example.chand.traveltogether.presenter.Interface.IRegisterPresenter;
-import com.example.chand.traveltogether.view.Interface.IRegisterView;
+import com.example.chand.traveltogether.presenter.presenternterface.IRegisterPresenter;
+import com.example.chand.traveltogether.view.viewinterface.IRegisterView;
 
 import java.lang.ref.WeakReference;
 
@@ -28,7 +28,7 @@ public class RegisterPresenter implements IRegisterPresenter {
     public void submitRegister(final String account, final String name, final String pwd) {
         if (!Validator.isEmail(account)) {
             view.get().showResult("请输入正确的邮箱账号");
-        }else if (!Validator.isPassword(pwd)) {
+        }else if (!Validator.isUserPass(pwd)) {
             view.get().showResult("密码长度应为8位至20位");
         }  else if (!Validator.isUsername(name)) {
             view.get().showResult("用户名长度为1到15位之间");

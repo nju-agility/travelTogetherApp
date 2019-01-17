@@ -7,7 +7,7 @@ import com.example.chand.traveltogether.model.User;
 import com.example.chand.traveltogether.model.UserEntity;
 
 public class TravelApplication extends Application {
-    private volatile static Context globalContext;
+    private static Context globalContext;
 
     @Override
     public void onCreate() {

@@ -1,9 +1,9 @@
 package com.example.chand.traveltogether.presenter;
 
-import com.example.chand.traveltogether.Utils.RequestManager;
+import com.example.chand.traveltogether.utils.RequestManager;
 import com.example.chand.traveltogether.model.Activity;
-import com.example.chand.traveltogether.presenter.Interface.ISearchResultPresenter;
-import com.example.chand.traveltogether.view.Interface.ISearchResultView;
+import com.example.chand.traveltogether.presenter.presenternterface.ISearchResultPresenter;
+import com.example.chand.traveltogether.view.viewinterface.ISearchResultView;
 
 import java.lang.ref.WeakReference;
 
