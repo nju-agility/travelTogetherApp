@@ -101,7 +101,7 @@ public class MainActivity extends FragmentActivity implements IMainView {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         unbinder = ButterKnife.bind(this);
-        for(String s:permissions){
+        for (String s : permissions) {
             int i = ContextCompat.checkSelfPermission(this, s);
             // 权限是否已经 授权 GRANTED---授权  DINIED---拒绝
             if (i != PackageManager.PERMISSION_GRANTED) {
@@ -143,14 +143,14 @@ public class MainActivity extends FragmentActivity implements IMainView {
     @Override
     protected void onResume() {
         super.onResume();
-        CodeHelper.clear(this);
+//        CodeHelper.clear(this);
         accountStr = SharedHelper.getSharedHelper().getStr("account", "账号");
         nameStr = SharedHelper.getSharedHelper().getStr("name", "用户名");
         String url = SharedHelper.getSharedHelper().getStr("userPic", "");
         if (url.equals("/image/Dont't find image!") || url.equals("")) {
             Glide.with(this).load(R.drawable.testpic).into(picIV);
         } else {
-            Glide.with(this).load(getString(R.string.base_url) + url).into(picIV);
+            Glide.with(this).load(getString(R.string.base_url) + url).apply(CodeHelper.getOptions()).into(picIV);
         }
         accountTv.setText(accountStr);
         nameTv.setText(nameStr);
@@ -248,7 +248,8 @@ public class MainActivity extends FragmentActivity implements IMainView {
         SharedHelper.getSharedHelper().setInt("gender", entity.getGender());
         SharedHelper.getSharedHelper().setInt("score", entity.getScore());
         SharedHelper.getSharedHelper().setStr("school", entity.getSchool());
-        SharedHelper.getSharedHelper().setStr("userPic", getString(R.string.base_url) + entity.getHeadURL());
+        SharedHelper.getSharedHelper().setStr("password", entity.getPasswd());
+        SharedHelper.getSharedHelper().setStr("userPic", entity.getHeadURL());
         SharedHelper.getSharedHelper().setInt("activity_id", entity.getActivity_id());
         SharedHelper.getSharedHelper().setBool("doing", false);
         presenter.getCurrentActivity(SharedHelper.getSharedHelper().getInt("activity_id", 0));
@@ -263,7 +264,7 @@ public class MainActivity extends FragmentActivity implements IMainView {
     @Override
     public void showError(String s) {
         System.out.println(s);
-        if(s.equals("没有正在进行的活动")){
+        if (s.equals("没有正在进行的活动")) {
             this.current = null;
             SharedHelper.getSharedHelper().setBool("doing", false);
         }

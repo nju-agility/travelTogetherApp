@@ -1,5 +1,6 @@
 package com.example.chand.traveltogether.presenter;
 
+import com.example.chand.traveltogether.model.User;
 import com.example.chand.traveltogether.utils.RequestManager;
 import com.example.chand.traveltogether.model.ReqUpload;
 import com.example.chand.traveltogether.model.UpdateUserTextInfoReq;
@@ -57,8 +58,8 @@ public class PersonCenterPresenter implements IPersonCenterPresenter {
     }
 
     @Override
-    public void requestUpdateIcon(String account, MultipartBody.Part File) {
-        manager.requestUpload(account,0,File)
+    public void requestUpdateIcon(final String account, final MultipartBody.Part File) {
+        manager.requestUpload(account, 0, File)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<ReqUpload>() {
@@ -69,10 +70,41 @@ public class PersonCenterPresenter implements IPersonCenterPresenter {
 
                     @Override
                     public void onNext(ReqUpload reqUpload) {
-                        if(reqUpload.getResCode()==0){
+                        if (reqUpload.getResCode() == 0) {
                             view.get().showReqResult("修改成功");
-                        }else {
+                            requestUserInfo(account);
+                        } else {
                             view.get().showReqResult("修改失败");
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+    }
+
+    @Override
+    public void requestUserInfo(String account) {
+        manager.getUserInfo(account)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<User>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(User user) {
+                        if (user.getResCode() == 0) {
+                            updateSharedPreference(user.getData().getContent().getHeadURL());
                         }
                     }
 
@@ -96,5 +128,9 @@ public class PersonCenterPresenter implements IPersonCenterPresenter {
         view.get().updateSharedPreference("city", city);
         view.get().updateSharedPreference("password", passwd);
         view.get().updateSharedPreference("school", school);
+    }
+
+    private void updateSharedPreference(String url) {
+        view.get().updateSharedPreference("userPic", url);
     }
 }

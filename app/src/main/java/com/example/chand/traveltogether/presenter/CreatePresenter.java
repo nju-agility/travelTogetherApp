@@ -36,10 +36,10 @@ public class CreatePresenter implements ICreatePresenter {
 
                     @Override
                     public void onNext(ReqAddActivity reqAddActivity) {
-                        String owner = account;
+                        String aid = reqAddActivity.getData().getContent().get(0).getAid() + "";
                         MultipartBody.Part f = file;
                         if (reqAddActivity.getResCode() == 0) {
-                            manager.requestUpload(owner, 3, f)
+                            manager.requestUpload(aid, 3, f)
                                     .subscribeOn(Schedulers.io())
                                     .observeOn(AndroidSchedulers.mainThread())
                                     .subscribe(new Observer<ReqUpload>() {

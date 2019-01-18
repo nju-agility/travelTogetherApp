@@ -1,21 +1,22 @@
 package com.example.chand.traveltogether.model;
 
-public class ReqAddActivity extends BaseModel {
-    private String data;
+import java.util.ArrayList;
 
-    public String getData() {
+public class ReqAddActivity extends BaseModel {
+    private ReqAddActivityContent data;
+
+    public ReqAddActivityContent getData() {
         return data;
     }
 
-    public void setData(String data) {
+    public void setData(ReqAddActivityContent data) {
         this.data = data;
     }
 
     @Override
     public String toString() {
-        return super.toString() +
-                "ReqAddActivity{" +
-                "data='" + data + '\'' +
+        return "ReqAddActivity{" +
+                "data=" + data +
                 '}';
     }
 }

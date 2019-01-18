@@ -74,7 +74,7 @@ public class DetailActivity extends AppCompatActivity implements ObservableScrol
     public void initialContent(int type) {
         CodeHelper.clear(this);
         if (null != activityEntity) {
-            Glide.with(this).load(R.drawable.testactivitypic).into(detail_img);
+            Glide.with(this).load(getString(R.string.base_url) + activityEntity.getActivityURL()).into(detail_img);
             detail_city.setText(activityEntity.getCity() + " " + activityEntity.getLocation());
             detail_theme.setText(activityEntity.getType());
             detail_intro.setText(activityEntity.getDetails());

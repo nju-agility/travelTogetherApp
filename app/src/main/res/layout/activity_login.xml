@@ -21,9 +21,9 @@
         <TextView
             android:layout_width="0dp"
             android:layout_height="80dp"
-            android:layout_weight="3"
+            android:layout_weight="5"
             android:text="大学生协同出游"
-            android:gravity="left|center_vertical"
+            android:gravity="center"
             android:textSize="26sp"
             android:textColor="#FFFFFF"
             android:fontFamily="monospace"/>

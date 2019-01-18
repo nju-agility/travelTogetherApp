@@ -80,7 +80,7 @@ public class PersonCenterActivity extends BaseActivity implements IPersonCenterV
     }
 
     public void loadDataFromSharedPreference() {
-        CodeHelper.clear(this);
+//        CodeHelper.clear(this);
         accountTv.setText(SharedHelper.getSharedHelper().getStr("account", "账号"));
         ageTv.setText(SharedHelper.getSharedHelper().getInt("age", 18) + "");
         cityTv.setText(SharedHelper.getSharedHelper().getStr("city", "地球村"));
@@ -102,7 +102,7 @@ public class PersonCenterActivity extends BaseActivity implements IPersonCenterV
         if (SharedHelper.getSharedHelper().getStr("userPic", "/image/Dont't find image!").equals("/image/Dont't find image!")) {
             Glide.with(this).load(R.drawable.testpic).into(picIv);
         } else {
-            Glide.with(this).load(getString(R.string.base_url) + SharedHelper.getSharedHelper().getStr("userPic", "")).into(picIv);
+            Glide.with(this).load(getString(R.string.base_url) + SharedHelper.getSharedHelper().getStr("userPic", "")).apply(CodeHelper.getOptions()).into(picIv);
         }
 
     }
@@ -134,7 +134,7 @@ public class PersonCenterActivity extends BaseActivity implements IPersonCenterV
     @Override
     public void showReqResult(String s) {
         Toast.makeText(this, s, Toast.LENGTH_SHORT).show();
-        loadDataFromSharedPreference();
+//        loadDataFromSharedPreference();
     }
 
     @Override
@@ -145,16 +145,19 @@ public class PersonCenterActivity extends BaseActivity implements IPersonCenterV
     @Override
     public void updateSharedPreference(String a, String b) {
         SharedHelper.getSharedHelper().setStr(a, b);
+        loadDataFromSharedPreference();
     }
 
     @Override
     public void updateSharedPreference(String a, boolean b) {
         SharedHelper.getSharedHelper().setBool(a, b);
+        loadDataFromSharedPreference();
     }
 
     @Override
     public void updateSharedPreference(String a, int b) {
         SharedHelper.getSharedHelper().setInt(a, b);
+        loadDataFromSharedPreference();
     }
 
 
@@ -180,9 +183,9 @@ public class PersonCenterActivity extends BaseActivity implements IPersonCenterV
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == REQUEST_CODE_CHOOSE && resultCode == RESULT_OK) {
             urls = data.getStringArrayListExtra(MultiImageSelectorActivity.EXTRA_RESULT);
-            if(urls.size()>0){
+            if (urls.size() > 0) {
                 String url = urls.get(0).toString();
-                File file=new File(url);
+                File file = new File(url);
                 // 创建 RequestBody，用于封装构建RequestBody
                 RequestBody requestFile =
                         RequestBody.create(MediaType.parse("multipart/form-data"), file);
@@ -193,7 +196,7 @@ public class PersonCenterActivity extends BaseActivity implements IPersonCenterV
                         MultipartBody.Part.createFormData("file", file.getName(), requestFile);
                 System.out.println(SharedHelper.getSharedHelper().getAccount());
 
-                presenter.requestUpdateIcon(SharedHelper.getSharedHelper().getAccount(),body);
+                presenter.requestUpdateIcon(SharedHelper.getSharedHelper().getAccount(), body);
 
             }
         }
@@ -209,6 +212,7 @@ public class PersonCenterActivity extends BaseActivity implements IPersonCenterV
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 String m_name = editText.getText().toString();
+                System.out.println(SharedHelper.getSharedHelper().getPassword());
                 if (Validator.isUsername(m_name)) {
                     presenter.reqUpdateUserTextInfo(m_name, SharedHelper.getSharedHelper().getGender(),
                             SharedHelper.getSharedHelper().getAge(), SharedHelper.getSharedHelper().getCity(),
