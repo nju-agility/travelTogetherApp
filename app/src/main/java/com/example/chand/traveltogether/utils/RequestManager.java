@@ -3,12 +3,14 @@ package com.example.chand.traveltogether.utils;
 
 import com.example.chand.traveltogether.application.TravelApplication;
 import com.example.chand.traveltogether.model.Activity;
+import com.example.chand.traveltogether.model.Artical;
 import com.example.chand.traveltogether.model.LoginReq;
 import com.example.chand.traveltogether.model.RegisterReq;
 import com.example.chand.traveltogether.model.ReqAddActivity;
 import com.example.chand.traveltogether.model.ReqJoinActivity;
 import com.example.chand.traveltogether.model.ReqQuitActivity;
 import com.example.chand.traveltogether.model.ReqUpload;
+import com.example.chand.traveltogether.model.ResultReq;
 import com.example.chand.traveltogether.model.UpdateUserTextInfoReq;
 import com.example.chand.traveltogether.model.User;
 
@@ -76,4 +78,22 @@ public class RequestManager {
                                                          String details, String time_start, String time_end, String type, int price) {
         return mRetrofitService.requestAddActivity(account, city, location, title, details, time_start, time_end, type, price);
     }
+
+    public Observable<ResultReq> requestReset(String account, String name) {
+        return mRetrofitService.requestReset(account, name);
+    }
+
+    public Observable<ResultReq> requestCreateArtical(String account, String city, String location, String title,
+                                                      String details, String submission_date) {
+        return mRetrofitService.requestCreateArtical(account, city, location, title, details, submission_date);
+    }
+
+    public Observable<Artical> requestAllArtical() {
+        return mRetrofitService.requestAllArtical();
+    }
+
+    public Observable<Artical> requestUserArtical(String account) {
+        return mRetrofitService.requestUserArtical(account);
+    }
+
 }

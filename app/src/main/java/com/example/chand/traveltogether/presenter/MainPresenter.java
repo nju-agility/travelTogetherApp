@@ -65,7 +65,7 @@ public class MainPresenter implements IMainPresenter {
 
                     @Override
                     public void onNext(Activity activity) {
-                        System.out.println(activity.toString());
+                        System.out.println(activity.getData().getContent().size());
                         if(activity.getResCode() == 0 ){
                             if (activity.getData().getContent().size() > 0){
                                 view.get().setCurrentActivity(activity.getData().getContent().get(0));

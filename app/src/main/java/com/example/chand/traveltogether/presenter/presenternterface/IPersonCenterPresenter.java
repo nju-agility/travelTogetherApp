@@ -8,4 +8,6 @@ public interface IPersonCenterPresenter {
     void requestUpdateIcon(String account, MultipartBody.Part File);
 
     void requestUserInfo(String account);
+
+    void requestUpdateStatus(String account, MultipartBody.Part File);
 }

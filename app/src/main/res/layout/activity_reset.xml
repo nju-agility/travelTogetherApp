@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/colorPrimary">
+    <TextView
+        android:id="@+id/reset_title"
+        android:layout_width="0dp"
+        android:layout_height="80dp"
+        android:layout_weight="5"
+        android:text="重置密码"
+        android:gravity="center"
+        android:textSize="26sp"
+        android:textColor="#FFFFFF"
+        android:fontFamily="monospace"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"/>
+    <LinearLayout
+        android:id="@+id/reset_input"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="60dp"
+        android:paddingRight="60dp"
+        android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@id/reset_title">
+        <com.github.florent37.materialtextfield.MaterialTextField
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:mtf_labelColor="#FFFFFF"
+            app:mtf_image="@drawable/account"
+            app:mtf_cardCollapsedHeight="4dp">
+            <EditText
+                android:id="@+id/reset_account"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Account"
+                android:textColor="#222222"
+                android:textSize="15sp" />
+
+        </com.github.florent37.materialtextfield.MaterialTextField>
+        <com.github.florent37.materialtextfield.MaterialTextField
+            android:layout_marginTop="30dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:mtf_labelColor="#FFFFFF"
+            app:mtf_image="@drawable/name">
+            <EditText
+                android:id="@+id/reset_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Name"
+                android:textColor="#222222"
+                android:textSize="15sp" />
+
+        </com.github.florent37.materialtextfield.MaterialTextField>
+
+
+    </LinearLayout>
+    <Button
+        android:id="@+id/submit_reset"
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center_horizontal"
+        android:text="确 定"
+        android:layout_marginTop="40dp"
+        android:textSize="18sp"
+        android:textColor="#979797"
+        android:background="@drawable/ripple_login_btn_style"
+        app:layout_constraintTop_toBottomOf="@id/reset_input"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"/>
+
+</android.support.constraint.ConstraintLayout>

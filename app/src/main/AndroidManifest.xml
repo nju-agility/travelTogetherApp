@@ -59,6 +59,13 @@
             android:name=".view.activity.CreateActivity"
             android:label="创建活动"
             android:theme="@style/AppTheme.Detail" />
+        <activity android:name=".view.activity.ResetActivity"
+            android:label="重置密码"
+            android:theme="@style/AppTheme.Login"/>
+        <activity android:name=".view.activity.ArticalDetailActivity"
+            android:label="游记详情"
+            android:theme="@style/AppTheme.AppDetail" />
+        <activity android:name=""
 
         <meta-data
             android:name="com.google.android.actions"

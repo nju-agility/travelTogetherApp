@@ -26,6 +26,7 @@ import com.example.chand.traveltogether.model.ActivityEntity;
 import com.example.chand.traveltogether.model.UserEntity;
 import com.example.chand.traveltogether.presenter.presenternterface.IMainPresenter;
 import com.example.chand.traveltogether.presenter.MainPresenter;
+import com.example.chand.traveltogether.view.fragment.ArticalFragment;
 import com.example.chand.traveltogether.view.fragment.SearchFragment;
 import com.example.chand.traveltogether.view.fragment.RecommendFragment;
 import com.example.chand.traveltogether.view.viewinterface.IMainView;
@@ -47,10 +48,14 @@ public class MainActivity extends FragmentActivity implements IMainView {
     LinearLayout recommend;
     @BindView(R.id.management_tab)
     LinearLayout management;
+    @BindView(R.id.artical_tab)
+    LinearLayout artical;
     @BindView(R.id.recommend_img)
     ImageView recommend_img;
     @BindView(R.id.management_img)
     ImageView management_img;
+    @BindView(R.id.artical_img)
+    ImageView artical_img;
 
     @BindView(R.id.user_info)
     LinearLayout user_info;
@@ -60,6 +65,8 @@ public class MainActivity extends FragmentActivity implements IMainView {
     LinearLayout user_current;
     @BindView(R.id.user_exit)
     LinearLayout user_exit;
+    @BindView(R.id.user_artical)
+    LinearLayout user_artical;
 
     @BindView(R.id.usr_account)
     TextView accountTv;
@@ -116,9 +123,12 @@ public class MainActivity extends FragmentActivity implements IMainView {
         actionBar.setDisplayUseLogoEnabled(true);
         Fragment recommendFragment = new RecommendFragment();
         Fragment searchResultFragment = new SearchFragment();
+        Fragment articalFragment = new ArticalFragment();
         fragments = new ArrayList<>();
         fragments.add(recommendFragment);
         fragments.add(searchResultFragment);
+        fragments.add(articalFragment);
+        //TODO 添加游记页面
         FragmentAdapter fragmentAdapter = new FragmentAdapter(getSupportFragmentManager(), fragments);
         pager.setAdapter(fragmentAdapter);
         pager.setCurrentItem(0);
@@ -180,25 +190,33 @@ public class MainActivity extends FragmentActivity implements IMainView {
     }
 
 
-    @OnClick({R.id.recommend_tab, R.id.management_tab})
+    @OnClick({R.id.recommend_tab, R.id.management_tab, R.id.artical_tab})
     public void changeTab(View view) {
         switch (view.getId()) {
             case R.id.recommend_tab: {
                 pager.setCurrentItem(0);
                 recommend_img.setImageResource(R.drawable.recommend_selected);
                 management_img.setImageResource(R.drawable.management_unselected);
+                artical_img.setImageResource(R.drawable.artical_unselected);
                 break;
             }
             case R.id.management_tab: {
                 pager.setCurrentItem(1);
                 recommend_img.setImageResource(R.drawable.recommend_unselected);
                 management_img.setImageResource(R.drawable.management_selected);
+                artical_img.setImageResource(R.drawable.artical_unselected);
                 break;
+            }
+            case R.id.artical_tab: {
+                pager.setCurrentItem(2);
+                recommend_img.setImageResource(R.drawable.recommend_unselected);
+                management_img.setImageResource(R.drawable.management_unselected);
+                artical_img.setImageResource(R.drawable.artical_selected);
             }
         }
     }
 
-    @OnClick({R.id.user_info, R.id.user_current, R.id.user_history, R.id.user_exit})
+    @OnClick({R.id.user_info, R.id.user_current, R.id.user_history, R.id.user_artical, R.id.user_exit})
     public void menuEvent(View view) {
         Intent intent;
         switch (view.getId()) {
@@ -208,7 +226,7 @@ public class MainActivity extends FragmentActivity implements IMainView {
                 break;
             }
             case R.id.user_current: {
-                if (null != this.current) {
+                if (null != this.current && SharedHelper.getSharedHelper().getBool("doing", false)) {
                     Bundle bundle = new Bundle();
                     bundle.putSerializable("activity", this.current);
                     bundle.putInt("type", 3);
@@ -222,6 +240,12 @@ public class MainActivity extends FragmentActivity implements IMainView {
             }
             case R.id.user_history: {
                 intent = new Intent(MainActivity.this, HistoryActivity.class);
+                startActivity(intent);
+                break;
+            }
+            //TODO 添加查看本人游记的选项
+            case R.id.user_artical:{
+                intent = new Intent(MainActivity.this, MyArticalActivity.class);
                 startActivity(intent);
                 break;
             }
@@ -246,13 +270,18 @@ public class MainActivity extends FragmentActivity implements IMainView {
         SharedHelper.getSharedHelper().setStr("city", entity.getCity().equals("") ? "地球村" : entity.getCity());
         SharedHelper.getSharedHelper().setInt("age", entity.getAge());
         SharedHelper.getSharedHelper().setInt("gender", entity.getGender());
-        SharedHelper.getSharedHelper().setInt("score", entity.getScore());
+        SharedHelper.getSharedHelper().setInt("status", entity.getStatus());
         SharedHelper.getSharedHelper().setStr("school", entity.getSchool());
         SharedHelper.getSharedHelper().setStr("password", entity.getPasswd());
         SharedHelper.getSharedHelper().setStr("userPic", entity.getHeadURL());
         SharedHelper.getSharedHelper().setInt("activity_id", entity.getActivity_id());
+//        if (entity.getActivity_id() > 0) {
+//            SharedHelper.getSharedHelper().setBool("doing", true);
+//        } else {
+//            SharedHelper.getSharedHelper().setBool("doing", false);
+//        }
         SharedHelper.getSharedHelper().setBool("doing", false);
-        presenter.getCurrentActivity(SharedHelper.getSharedHelper().getInt("activity_id", 0));
+        presenter.getCurrentActivity(SharedHelper.getSharedHelper().getInt("activity_id", -1));
     }
 
     @Override

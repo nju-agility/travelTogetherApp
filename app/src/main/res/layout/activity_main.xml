@@ -74,7 +74,7 @@
                     android:layout_height="70dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintLeft_toRightOf="@id/recommend_tab"
-                    app:layout_constraintRight_toRightOf="parent">
+                    app:layout_constraintRight_toRightOf="@id/artical_tab">
 
                     <ImageView
                         android:id="@+id/management_img"
@@ -93,6 +93,36 @@
                         android:textColor="#000000"
                         android:textSize="13sp"
                         android:text="活动分类"
+                        android:gravity="center"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/artical_tab"
+                    android:layout_width="60dp"
+                    android:layout_height="70dp"
+                    android:orientation="vertical"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintHorizontal_chainStyle="spread"
+                    app:layout_constraintLeft_toRightOf="@id/management_tab"
+                    app:layout_constraintRight_toRightOf="parent">
+
+                    <ImageView
+                        android:id="@+id/artical_img"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:scaleType="fitXY"
+                        android:paddingLeft="6dp"
+                        android:paddingRight="6dp"
+                        android:paddingTop="6dp"
+                        android:paddingBottom="2dp"
+                        android:layout_gravity="center_horizontal"
+                        android:src="@drawable/artical_unselected"/>
+                    <TextView
+                        android:id="@+id/artical_text"
+                        android:layout_width="60dp"
+                        android:layout_height="30dp"
+                        android:textColor="#000000"
+                        android:textSize="13sp"
+                        android:text="游记推荐"
                         android:gravity="center"/>
                 </LinearLayout>
             </android.support.constraint.ConstraintLayout>
@@ -286,12 +316,42 @@
                         android:layout_gravity="center_vertical"/>
                 </LinearLayout>
                 <LinearLayout
-                    android:id="@+id/user_exit"
+                    android:id="@+id/user_artical"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     android:layout_marginTop="12dp"
                     app:layout_constraintTop_toBottomOf="@id/user_current"
+                    android:background="?android:attr/selectableItemBackground"
+                    android:focusable="true"
+                    app:layout_constraintStart_toStartOf="parent">
+                    <ImageView
+                        android:id="@+id/usr_artical_img"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:padding="12dp"
+                        android:scaleType="fitXY"
+                        android:layout_marginStart="24dp"
+                        android:src="@drawable/articalicon"
+                        android:layout_gravity="center_vertical"/>
+                    <TextView
+                        android:id="@+id/usr_artical"
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        android:textSize="13sp"
+                        android:text="我的游记"
+                        android:layout_marginStart="8dp"
+                        android:gravity="center_vertical|start"
+                        android:textColor="#000000"
+                        android:layout_gravity="center_vertical"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/user_exit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="12dp"
+                    app:layout_constraintTop_toBottomOf="@id/user_artical"
                     android:background="?android:attr/selectableItemBackground"
                     android:focusable="true"
                     app:layout_constraintStart_toStartOf="parent">

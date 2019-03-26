@@ -120,6 +120,39 @@ public class PersonCenterPresenter implements IPersonCenterPresenter {
                 });
     }
 
+    @Override
+    public void requestUpdateStatus(final String account, MultipartBody.Part File) {
+        manager.requestUpload(account, 1, File)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<ReqUpload>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(ReqUpload reqUpload) {
+                        if (reqUpload.getResCode() == 0) {
+                            view.get().showReqResult("上传成功");
+                            requestUserInfo(account);
+                        } else {
+                            view.get().showReqResult("上传失败");
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+    }
+
     private void updateSharedPreference(String name, int gender, int age, String city, String code, String passwd, String school) {
         view.get().updateSharedPreference("name", name);
         view.get().updateSharedPreference("gender", gender);

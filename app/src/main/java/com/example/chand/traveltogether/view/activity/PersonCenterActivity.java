@@ -4,6 +4,7 @@ import android.app.ActionBar;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.constraint.ConstraintLayout;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
@@ -43,19 +44,23 @@ public class PersonCenterActivity extends BaseActivity implements IPersonCenterV
     TextView genderTv;
     @BindView(R.id.center_user_password)
     TextView passwordTv;
-    @BindView(R.id.center_user_score)
-    TextView scoreTv;
+    @BindView(R.id.center_user_status)
+    TextView statusTv;
     @BindView(R.id.center_user_school)
     TextView schoolTv;
     @BindView(R.id.center_user_name)
     TextView nameTv;
     @BindView(R.id.center_user_img)
     ImageView picIv;
+    @BindView(R.id.center_status_container)
+    ConstraintLayout status_container;
     Unbinder unbinder;
 
     private PersonCenterPresenter presenter;
     final int REQUEST_CODE_CHOOSE = 100;
+    final int REQUEST_CODE_STATUS = 101;
     private ArrayList<String> urls;
+    private ArrayList<String> statusUrls;
 
 
     @Override
@@ -98,7 +103,29 @@ public class PersonCenterActivity extends BaseActivity implements IPersonCenterV
         passwordTv.setText(stringBuffer.toString());
         schoolTv.setText(SharedHelper.getSharedHelper().getStr("school", "南京大学"));
         nameTv.setText(SharedHelper.getSharedHelper().getStr("name", "啊翔"));
-        scoreTv.setText(SharedHelper.getSharedHelper().getInt("score", 100) + "");
+        switch (SharedHelper.getSharedHelper().getInt("status", 0)) {
+            case -1: {
+                status_container.setClickable(true);
+                statusTv.setText("验证错误");
+                break;
+            }
+            case 0: {
+                status_container.setClickable(true);
+                statusTv.setText("未验证");
+                break;
+            }
+            case 1: {
+                status_container.setClickable(false);
+                statusTv.setText("已上传，待验证");
+                break;
+            }
+            case 2: {
+                status_container.setClickable(false);
+                statusTv.setText("验证通过");
+                break;
+            }
+        }
+
         if (SharedHelper.getSharedHelper().getStr("userPic", "/image/Dont't find image!").equals("/image/Dont't find image!")) {
             Glide.with(this).load(R.drawable.testpic).into(picIv);
         } else {
@@ -178,6 +205,16 @@ public class PersonCenterActivity extends BaseActivity implements IPersonCenterV
                 .start(this, REQUEST_CODE_CHOOSE);
     }
 
+    @OnClick(R.id.center_status_container)
+    public void changeStatus(View view) {
+        MultiImageSelector.create(this)
+                .showCamera(false)
+                .count(1)
+                .single()
+                .origin(statusUrls)
+                .start(this, REQUEST_CODE_STATUS);
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -191,12 +228,29 @@ public class PersonCenterActivity extends BaseActivity implements IPersonCenterV
                         RequestBody.create(MediaType.parse("multipart/form-data"), file);
 
                 // MultipartBody.Part  和后端约定好Key，这里的partName是用image
-                System.out.println(file.getName());
                 MultipartBody.Part body =
                         MultipartBody.Part.createFormData("file", file.getName(), requestFile);
-                System.out.println(SharedHelper.getSharedHelper().getAccount());
+
 
                 presenter.requestUpdateIcon(SharedHelper.getSharedHelper().getAccount(), body);
+
+            }
+        }
+        if (requestCode == REQUEST_CODE_STATUS && resultCode == RESULT_OK) {
+            statusUrls = data.getStringArrayListExtra(MultiImageSelectorActivity.EXTRA_RESULT);
+            if (statusUrls.size() > 0) {
+                String url = statusUrls.get(0).toString();
+                File file = new File(url);
+                // 创建 RequestBody，用于封装构建Req1uestBody
+                RequestBody requestFile =
+                        RequestBody.create(MediaType.parse("multipart/form-data"), file);
+
+                // MultipartBody.Part  和后端约定好Key，这里的partName是用image
+                MultipartBody.Part body =
+                        MultipartBody.Part.createFormData("file", file.getName(), requestFile);
+
+
+                presenter.requestUpdateStatus(SharedHelper.getSharedHelper().getAccount(), body);
 
             }
         }
