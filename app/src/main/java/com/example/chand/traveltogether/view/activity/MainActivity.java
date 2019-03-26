@@ -216,7 +216,7 @@ public class MainActivity extends FragmentActivity implements IMainView {
         }
     }
 
-    @OnClick({R.id.user_info, R.id.user_current, R.id.user_history, R.id.user_artical, R.id.user_exit})
+    @OnClick({R.id.user_info, R.id.user_current, R.id.user_history, R.id.user_artical, R.id.user_exit,R.id.user_create_artical})
     public void menuEvent(View view) {
         Intent intent;
         switch (view.getId()) {
@@ -246,6 +246,11 @@ public class MainActivity extends FragmentActivity implements IMainView {
             //TODO 添加查看本人游记的选项
             case R.id.user_artical:{
                 intent = new Intent(MainActivity.this, MyArticalActivity.class);
+                startActivity(intent);
+                break;
+            }
+            case R.id.user_create_artical:{
+                intent = new Intent(MainActivity.this, CreateArticalActivity.class);
                 startActivity(intent);
                 break;
             }
