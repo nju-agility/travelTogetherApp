@@ -6,6 +6,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.chand.traveltogether.R;
+import com.example.chand.traveltogether.presenter.ResetPresenter;
 import com.example.chand.traveltogether.presenter.presenternterface.IResetPresenter;
 import com.example.chand.traveltogether.view.viewinterface.IResetView;
 
@@ -30,6 +31,7 @@ public class ResetActivity extends BaseActivity implements IResetView {
     protected void initialData() {
         setContentView(R.layout.activity_reset);
         unbinder = ButterKnife.bind(this);
+        resetPresenter = new ResetPresenter(this);
 
     }
 

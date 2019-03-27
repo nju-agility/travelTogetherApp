@@ -1,5 +1,7 @@
 package com.example.chand.traveltogether.presenter;
 
+import com.example.chand.traveltogether.model.Artical;
+import com.example.chand.traveltogether.model.ArticalReq;
 import com.example.chand.traveltogether.model.ReqUpload;
 import com.example.chand.traveltogether.model.ResultReq;
 import com.example.chand.traveltogether.presenter.presenternterface.ICreateArticalPresenter;
@@ -25,20 +27,20 @@ public class CreateArticalPresenter implements ICreateArticalPresenter {
     }
 
     @Override
-    public void requestCreateArtical(final String account, String city, String location, String title, String detail, String submission_date, final MultipartBody.Part file) {
+    public void requestCreateArtical(final String account, final String city, final String location, final String title, final String detail, final String submission_date, final MultipartBody.Part file) {
         manager.requestCreateArtical(account, city, location, title, detail, submission_date)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<ResultReq>() {
+                .subscribe(new Observer<ArticalReq>() {
                     @Override
                     public void onSubscribe(Disposable d) {
 
                     }
 
                     @Override
-                    public void onNext(ResultReq resultReq) {
-                        if (resultReq.getResCode() == 0) {
-                            manager.requestUpload(account,2,file)
+                    public void onNext(ArticalReq artical) {
+                        if (artical.getResCode() == 0) {
+                            manager.requestUpload(artical.getData().getContent().getId() + "", 2, file)
                                     .subscribeOn(Schedulers.io())
                                     .observeOn(AndroidSchedulers.mainThread())
                                     .subscribe(new Observer<ReqUpload>() {
@@ -49,9 +51,10 @@ public class CreateArticalPresenter implements ICreateArticalPresenter {
 
                                         @Override
                                         public void onNext(ReqUpload reqUpload) {
-                                            if(reqUpload.getResCode() == 0){
+                                            System.out.println("file: " + reqUpload.getResCode());
+                                            if (reqUpload.getResCode() == 0) {
                                                 view.get().requestSuccess();
-                                            }else {
+                                            } else {
                                                 view.get().requestError();
                                             }
                                         }
@@ -73,7 +76,7 @@ public class CreateArticalPresenter implements ICreateArticalPresenter {
 
                     @Override
                     public void onError(Throwable e) {
-
+                        System.out.println(e);
                     }
 
                     @Override

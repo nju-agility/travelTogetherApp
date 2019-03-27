@@ -78,19 +78,21 @@ public class LoginActivity extends BaseActivity implements ILoginView {
 
 
     private void showNormalDialog() {
-        final AlertDialog.Builder normalDialog =
-                new AlertDialog.Builder(LoginActivity.this);
-        normalDialog.setIcon(R.drawable.x);
-        normalDialog.setTitle("该功能暂未开放");
-        normalDialog.setMessage("由于后台服务器没有设置邮箱，该功能暂未开放！");
-        normalDialog.setPositiveButton("确定",
-                new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        System.out.println("user want to reset the account");
-                    }
-                });
-        normalDialog.show();
+//        final AlertDialog.Builder normalDialog =
+//                new AlertDialog.Builder(LoginActivity.this);
+//        normalDialog.setIcon(R.drawable.x);
+//        normalDialog.setTitle("该功能暂未开放");
+//        normalDialog.setMessage("由于后台服务器没有设置邮箱，该功能暂未开放！");
+//        normalDialog.setPositiveButton("确定",
+//                new DialogInterface.OnClickListener() {
+//                    @Override
+//                    public void onClick(DialogInterface dialog, int which) {
+//                        System.out.println("user want to reset the account");
+//                    }
+//                });
+//        normalDialog.show();
+        Intent intent = new Intent(LoginActivity.this,ResetActivity.class);
+        startActivity(intent);
     }
 
     @Override

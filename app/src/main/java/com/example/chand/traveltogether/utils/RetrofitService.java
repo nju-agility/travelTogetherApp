@@ -2,6 +2,7 @@ package com.example.chand.traveltogether.utils;
 
 import com.example.chand.traveltogether.model.Activity;
 import com.example.chand.traveltogether.model.Artical;
+import com.example.chand.traveltogether.model.ArticalReq;
 import com.example.chand.traveltogether.model.LoginReq;
 import com.example.chand.traveltogether.model.RegisterReq;
 import com.example.chand.traveltogether.model.ReqAddActivity;
@@ -71,8 +72,8 @@ public interface RetrofitService {
     Observable<ResultReq> requestReset(@Query("account") String account, @Query("name") String name);
 
     @GET("/api/createTravelNote")
-    Observable<ResultReq> requestCreateArtical(@Query("account") String account, @Query("city") String city, @Query("location") String location, @Query("title") String title,
-                                               @Query("details") String details, @Query("submission_date") String submission_date);
+    Observable<ArticalReq> requestCreateArtical(@Query("account") String account, @Query("city") String city, @Query("location") String location, @Query("title") String title,
+                                                @Query("details") String details, @Query("submission_date") String submission_date);
 
     @GET("/api/queryAllTravelNote")
     Observable<Artical> requestAllArtical();

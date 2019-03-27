@@ -249,7 +249,6 @@ public class PersonCenterActivity extends BaseActivity implements IPersonCenterV
                 MultipartBody.Part body =
                         MultipartBody.Part.createFormData("file", file.getName(), requestFile);
 
-
                 presenter.requestUpdateStatus(SharedHelper.getSharedHelper().getAccount(), body);
 
             }

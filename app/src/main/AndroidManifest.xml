@@ -71,6 +71,9 @@
             android:name=".view.activity.CreateArticalActivity"
             android:label="创建游记"
             android:theme="@style/AppTheme.Detail" />
+        <activity android:name=".view.activity.MyArticalActivity"
+            android:label="我的游记"
+            android:theme="@style/AppTheme.Detail"/>
 
         <meta-data
             android:name="com.google.android.actions"

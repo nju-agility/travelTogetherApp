@@ -4,6 +4,7 @@ package com.example.chand.traveltogether.utils;
 import com.example.chand.traveltogether.application.TravelApplication;
 import com.example.chand.traveltogether.model.Activity;
 import com.example.chand.traveltogether.model.Artical;
+import com.example.chand.traveltogether.model.ArticalReq;
 import com.example.chand.traveltogether.model.LoginReq;
 import com.example.chand.traveltogether.model.RegisterReq;
 import com.example.chand.traveltogether.model.ReqAddActivity;
@@ -83,8 +84,8 @@ public class RequestManager {
         return mRetrofitService.requestReset(account, name);
     }
 
-    public Observable<ResultReq> requestCreateArtical(String account, String city, String location, String title,
-                                                      String details, String submission_date) {
+    public Observable<ArticalReq> requestCreateArtical(String account, String city, String location, String title,
+                                                       String details, String submission_date) {
         return mRetrofitService.requestCreateArtical(account, city, location, title, details, submission_date);
     }
 

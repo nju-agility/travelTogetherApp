@@ -77,18 +77,18 @@ public class ArticalAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 //                });
                 break;
             case UNOFFICIAL:
-                RecyclerAdapter.UnOfficialHolder holder = (RecyclerAdapter.UnOfficialHolder) viewHolder;
+                ArticalAdapter.UnOfficialHolder holder = (ArticalAdapter.UnOfficialHolder) viewHolder;
                 String url = articals.get(i).getImgPath();
                 boolean exits = url != null;
                 if (!exits||url.equals("/image/Dont't find image!") || url.equals("")) {
-                    Glide.with(mcontext.get()).load(R.drawable.testactivitypic).into(holder.activity_pic);
+                    Glide.with(mcontext.get()).load(R.drawable.testactivitypic).into(holder.artical_pic);
                 } else {
-                    Glide.with(mcontext.get()).load(mcontext.get().getString(R.string.base_url) + url).into(holder.activity_pic);
+                    Glide.with(mcontext.get()).load(mcontext.get().getString(R.string.base_url) + url).into(holder.artical_pic);
                 }
-                holder.activity_title.setText(articals.get(i).getTitle());
-                holder.activity_city.setText(articals.get(i).getCity() + "  " + articals.get(i).getLocation());
-                holder.activity_time.setText(articals.get(i).getSubmission_date());
-                holder.activity_owner.setText(articals.get(i).getAccount());
+                holder.artical_title.setText(articals.get(i).getTitle());
+                holder.artical_city.setText(articals.get(i).getCity() + "  " + articals.get(i).getLocation());
+                holder.artical_time.setText(articals.get(i).getSubmission_date());
+                holder.artical_owner.setText(articals.get(i).getAccount());
                 holder.cardView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {

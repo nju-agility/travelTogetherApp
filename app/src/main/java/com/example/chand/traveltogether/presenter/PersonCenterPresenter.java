@@ -105,12 +105,13 @@ public class PersonCenterPresenter implements IPersonCenterPresenter {
                     public void onNext(User user) {
                         if (user.getResCode() == 0) {
                             updateSharedPreference(user.getData().getContent().getHeadURL());
+                            updateSharedPreference(user.getData().getContent().getStatus());
                         }
                     }
 
                     @Override
                     public void onError(Throwable e) {
-
+                        System.out.println(e);
                     }
 
                     @Override
@@ -143,7 +144,7 @@ public class PersonCenterPresenter implements IPersonCenterPresenter {
 
                     @Override
                     public void onError(Throwable e) {
-
+                        System.out.println(e);
                     }
 
                     @Override
@@ -165,5 +166,9 @@ public class PersonCenterPresenter implements IPersonCenterPresenter {
 
     private void updateSharedPreference(String url) {
         view.get().updateSharedPreference("userPic", url);
+    }
+
+    private void updateSharedPreference(int studentCard){
+        view.get().updateSharedPreference("status", studentCard);
     }
 }

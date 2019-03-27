@@ -23,6 +23,8 @@ import com.example.chand.traveltogether.view.viewinterface.ICreateArticalView;
 
 import java.io.File;
 import java.text.DateFormat;
+import java.text.ParsePosition;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -72,7 +74,7 @@ public class CreateArticalActivity extends BaseActivity implements ICreateArtica
     @Override
     protected void initialData() {
         setContentView(R.layout.activity_create_artical);
-        ButterKnife.bind(this);
+        unbinder = ButterKnife.bind(this);
         presenter = new CreateArticalPresenter(this);
         ActionBar actionBar = getActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
@@ -113,6 +115,7 @@ public class CreateArticalActivity extends BaseActivity implements ICreateArtica
     @Override
     public void requestSuccess() {
         Toast.makeText(this, "游记创建成功!", Toast.LENGTH_SHORT).show();
+
         finish();
     }
 
@@ -261,7 +264,17 @@ public class CreateArticalActivity extends BaseActivity implements ICreateArtica
         if (url.length() > 0 && city.getText().toString().length() > 0 && location.getText().toString().length() > 0
                 && title.getText().toString().length() > 0 && detail.getText().toString().length() > 0) {
             presenter.requestCreateArtical(account.getText().toString(), city.getText().toString(), location.getText().toString(),
-                    title.getText().toString(), detail.getText().toString(), DateFormat.getDateInstance().format(new Date()), file_body);
+                    title.getText().toString(), detail.getText().toString(), getStringDateShort(), file_body);
         }
+        else {
+            Toast.makeText(this, "请输入正确信息!", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    public static String getStringDateShort() {
+        Date currentTime = new Date();
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        String dateString = formatter.format(currentTime);
+        return dateString;
     }
 }
